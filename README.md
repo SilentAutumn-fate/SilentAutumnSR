@@ -15,7 +15,7 @@
 
 ```bash
 # 前提步骤
-$ npm install
+$ 双击运行 install.bat（自动执行 npm install 安装依赖）
 ```
 
 ## 1. 自动运行:
