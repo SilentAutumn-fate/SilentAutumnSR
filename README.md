@@ -1,6 +1,6 @@
 # SilentAutumnSR
 
-# 支持 [freesr-data.json](https://freesr-tools.pages.dev/) 配置导入
+# 支持 [freesr-data.json](https://srtools.neonteam.dev/) 配置导入
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
