@@ -1,0 +1,1136 @@
+{
+  "source": {
+    "file": "StarRail_Beta/StarRail_Data/Persistent/DesignData/Windows/bc2a4d06b90c439d0494524d16631612.bytes",
+    "sha256": "fcf58a858f01fe0307dbfa0ddf16f288849c19e5e85767e163b31c9c90c549c9",
+    "offset": 5698275,
+    "count": 225,
+    "clientVersion": "4.7.51"
+  },
+  "interact_config": [
+    {
+      "InteractID": 1010,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1011,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1020,
+      "SrcState": 0,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1030,
+      "SrcState": 0,
+      "TargetState": 3
+    },
+    {
+      "InteractID": 1040,
+      "SrcState": 0,
+      "TargetState": 4
+    },
+    {
+      "InteractID": 1050,
+      "SrcState": 0,
+      "TargetState": 5
+    },
+    {
+      "InteractID": 1060,
+      "SrcState": 0,
+      "TargetState": 6
+    },
+    {
+      "InteractID": 1090,
+      "SrcState": 0,
+      "TargetState": 9
+    },
+    {
+      "InteractID": 1100,
+      "SrcState": 1,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 1101,
+      "SrcState": 1,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 1120,
+      "SrcState": 1,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1190,
+      "SrcState": 1,
+      "TargetState": 9
+    },
+    {
+      "InteractID": 1200,
+      "SrcState": 2,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 1210,
+      "SrcState": 2,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1230,
+      "SrcState": 2,
+      "TargetState": 3
+    },
+    {
+      "InteractID": 1300,
+      "SrcState": 3,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 1340,
+      "SrcState": 3,
+      "TargetState": 4
+    },
+    {
+      "InteractID": 1350,
+      "SrcState": 3,
+      "TargetState": 5
+    },
+    {
+      "InteractID": 1360,
+      "SrcState": 3,
+      "TargetState": 6
+    },
+    {
+      "InteractID": 1400,
+      "SrcState": 4,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 1430,
+      "SrcState": 4,
+      "TargetState": 3
+    },
+    {
+      "InteractID": 1450,
+      "SrcState": 4,
+      "TargetState": 5
+    },
+    {
+      "InteractID": 1500,
+      "SrcState": 5,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 1530,
+      "SrcState": 5,
+      "TargetState": 3
+    },
+    {
+      "InteractID": 1540,
+      "SrcState": 5,
+      "TargetState": 4
+    },
+    {
+      "InteractID": 1560,
+      "SrcState": 5,
+      "TargetState": 6
+    },
+    {
+      "InteractID": 1600,
+      "SrcState": 6,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 1610,
+      "SrcState": 6,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1630,
+      "SrcState": 6,
+      "TargetState": 3
+    },
+    {
+      "InteractID": 1650,
+      "SrcState": 6,
+      "TargetState": 5
+    },
+    {
+      "InteractID": 1920,
+      "SrcState": 9,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 3011,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3012,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3013,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3014,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3015,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3016,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3017,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3018,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3200,
+      "SrcState": 2,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 3801,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3019,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3020,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3021,
+      "SrcState": 2,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3022,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 3023,
+      "SrcState": 14,
+      "TargetState": 15
+    },
+    {
+      "InteractID": 10100,
+      "SrcState": 0,
+      "TargetState": 10
+    },
+    {
+      "InteractID": 11000,
+      "SrcState": 10,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 11010,
+      "SrcState": 10,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 11090,
+      "SrcState": 10,
+      "TargetState": 9
+    },
+    {
+      "InteractID": 11100,
+      "SrcState": 1,
+      "TargetState": 10
+    },
+    {
+      "InteractID": 11700,
+      "SrcState": 17,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 10117,
+      "SrcState": 1,
+      "TargetState": 17
+    },
+    {
+      "InteractID": 12140,
+      "SrcState": 2,
+      "TargetState": 14
+    },
+    {
+      "InteractID": 19100,
+      "SrcState": 9,
+      "TargetState": 10
+    },
+    {
+      "InteractID": 111120,
+      "SrcState": 11,
+      "TargetState": 12
+    },
+    {
+      "InteractID": 112110,
+      "SrcState": 12,
+      "TargetState": 11
+    },
+    {
+      "InteractID": 112131,
+      "SrcState": 12,
+      "TargetState": 13
+    },
+    {
+      "InteractID": 114150,
+      "SrcState": 14,
+      "TargetState": 15
+    },
+    {
+      "InteractID": 115140,
+      "SrcState": 15,
+      "TargetState": 14
+    },
+    {
+      "InteractID": 118191,
+      "SrcState": 18,
+      "TargetState": 19
+    },
+    {
+      "InteractID": 10191,
+      "SrcState": 0,
+      "TargetState": 19
+    },
+    {
+      "InteractID": 11191,
+      "SrcState": 1,
+      "TargetState": 19
+    },
+    {
+      "InteractID": 12180,
+      "SrcState": 2,
+      "TargetState": 18
+    },
+    {
+      "InteractID": 10180,
+      "SrcState": 0,
+      "TargetState": 18
+    },
+    {
+      "InteractID": 11800,
+      "SrcState": 18,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 120120,
+      "SrcState": 20,
+      "TargetState": 12
+    },
+    {
+      "InteractID": 112200,
+      "SrcState": 12,
+      "TargetState": 20
+    },
+    {
+      "InteractID": 120100,
+      "SrcState": 20,
+      "TargetState": 10
+    },
+    {
+      "InteractID": 121220,
+      "SrcState": 21,
+      "TargetState": 22
+    },
+    {
+      "InteractID": 121230,
+      "SrcState": 21,
+      "TargetState": 23
+    },
+    {
+      "InteractID": 121240,
+      "SrcState": 21,
+      "TargetState": 24
+    },
+    {
+      "InteractID": 122210,
+      "SrcState": 22,
+      "TargetState": 21
+    },
+    {
+      "InteractID": 122230,
+      "SrcState": 22,
+      "TargetState": 23
+    },
+    {
+      "InteractID": 122240,
+      "SrcState": 22,
+      "TargetState": 24
+    },
+    {
+      "InteractID": 123210,
+      "SrcState": 23,
+      "TargetState": 21
+    },
+    {
+      "InteractID": 123220,
+      "SrcState": 23,
+      "TargetState": 22
+    },
+    {
+      "InteractID": 123240,
+      "SrcState": 23,
+      "TargetState": 24
+    },
+    {
+      "InteractID": 124210,
+      "SrcState": 24,
+      "TargetState": 21
+    },
+    {
+      "InteractID": 124220,
+      "SrcState": 24,
+      "TargetState": 22
+    },
+    {
+      "InteractID": 124230,
+      "SrcState": 24,
+      "TargetState": 23
+    },
+    {
+      "InteractID": 125001,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 125002,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 125003,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 125006,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 125007,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 125008,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 125009,
+      "SrcState": 0,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 100020,
+      "SrcState": 0,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 100022,
+      "SrcState": 0,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 100023,
+      "SrcState": 0,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 100024,
+      "SrcState": 0,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 100025,
+      "SrcState": 0,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 100026,
+      "SrcState": 0,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 100027,
+      "SrcState": 0,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 100028,
+      "SrcState": 0,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 101020,
+      "SrcState": 101,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 101021,
+      "SrcState": 102,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 101022,
+      "SrcState": 103,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 101023,
+      "SrcState": 104,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 101024,
+      "SrcState": 105,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 101025,
+      "SrcState": 106,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 101026,
+      "SrcState": 107,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 101027,
+      "SrcState": 108,
+      "TargetState": 109
+    },
+    {
+      "InteractID": 101000,
+      "SrcState": 101,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 102000,
+      "SrcState": 102,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 103000,
+      "SrcState": 103,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 104000,
+      "SrcState": 104,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 105000,
+      "SrcState": 105,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 106000,
+      "SrcState": 106,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 107000,
+      "SrcState": 107,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 108000,
+      "SrcState": 108,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 12101,
+      "SrcState": 2,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 12102,
+      "SrcState": 2,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 12103,
+      "SrcState": 2,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 12104,
+      "SrcState": 2,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 12105,
+      "SrcState": 2,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 12106,
+      "SrcState": 2,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 12107,
+      "SrcState": 2,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 12108,
+      "SrcState": 2,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 101101,
+      "SrcState": 1,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 101102,
+      "SrcState": 1,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 101103,
+      "SrcState": 1,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 101104,
+      "SrcState": 1,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 101105,
+      "SrcState": 1,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 101106,
+      "SrcState": 1,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 101107,
+      "SrcState": 1,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 101108,
+      "SrcState": 1,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 1020101,
+      "SrcState": 102,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 1030102,
+      "SrcState": 103,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 1040103,
+      "SrcState": 104,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 1050104,
+      "SrcState": 105,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 1060105,
+      "SrcState": 106,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 1070106,
+      "SrcState": 107,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 1080107,
+      "SrcState": 108,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 1090108,
+      "SrcState": 109,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 1030101,
+      "SrcState": 103,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 1040101,
+      "SrcState": 104,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 1050101,
+      "SrcState": 105,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 1060101,
+      "SrcState": 106,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 1070101,
+      "SrcState": 107,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 1080101,
+      "SrcState": 108,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 1090101,
+      "SrcState": 109,
+      "TargetState": 101
+    },
+    {
+      "InteractID": 1010108,
+      "SrcState": 101,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 1020108,
+      "SrcState": 102,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 1030108,
+      "SrcState": 103,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 1040108,
+      "SrcState": 104,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 1050108,
+      "SrcState": 105,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 1060108,
+      "SrcState": 106,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 1070108,
+      "SrcState": 107,
+      "TargetState": 108
+    },
+    {
+      "InteractID": 2002,
+      "SrcState": 20,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 2000,
+      "SrcState": 20,
+      "TargetState": 0
+    },
+    {
+      "InteractID": 2001,
+      "SrcState": 20,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1010103,
+      "SrcState": 101,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 1010104,
+      "SrcState": 101,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 1010105,
+      "SrcState": 101,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 1010106,
+      "SrcState": 101,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 1010107,
+      "SrcState": 101,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 1010109,
+      "SrcState": 101,
+      "TargetState": 109
+    },
+    {
+      "InteractID": 1010102,
+      "SrcState": 101,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 1020103,
+      "SrcState": 102,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 1020104,
+      "SrcState": 102,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 1020105,
+      "SrcState": 102,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 1020106,
+      "SrcState": 102,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 1020107,
+      "SrcState": 102,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 1020109,
+      "SrcState": 102,
+      "TargetState": 109
+    },
+    {
+      "InteractID": 1030104,
+      "SrcState": 103,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 1030105,
+      "SrcState": 103,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 1030106,
+      "SrcState": 103,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 1030107,
+      "SrcState": 103,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 1030109,
+      "SrcState": 103,
+      "TargetState": 109
+    },
+    {
+      "InteractID": 1040105,
+      "SrcState": 104,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 1040106,
+      "SrcState": 104,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 1040107,
+      "SrcState": 104,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 1040109,
+      "SrcState": 104,
+      "TargetState": 109
+    },
+    {
+      "InteractID": 1050106,
+      "SrcState": 105,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 1050107,
+      "SrcState": 105,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 1050109,
+      "SrcState": 105,
+      "TargetState": 109
+    },
+    {
+      "InteractID": 1060107,
+      "SrcState": 106,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 1060109,
+      "SrcState": 106,
+      "TargetState": 109
+    },
+    {
+      "InteractID": 1070109,
+      "SrcState": 107,
+      "TargetState": 109
+    },
+    {
+      "InteractID": 1080109,
+      "SrcState": 108,
+      "TargetState": 109
+    },
+    {
+      "InteractID": 1040102,
+      "SrcState": 104,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 1050102,
+      "SrcState": 105,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 1060102,
+      "SrcState": 106,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 1070102,
+      "SrcState": 107,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 1080102,
+      "SrcState": 108,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 1090102,
+      "SrcState": 109,
+      "TargetState": 102
+    },
+    {
+      "InteractID": 1050103,
+      "SrcState": 105,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 1060103,
+      "SrcState": 106,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 1070103,
+      "SrcState": 107,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 1080103,
+      "SrcState": 108,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 1090103,
+      "SrcState": 109,
+      "TargetState": 103
+    },
+    {
+      "InteractID": 1060104,
+      "SrcState": 106,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 1070104,
+      "SrcState": 107,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 1080104,
+      "SrcState": 108,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 1090104,
+      "SrcState": 109,
+      "TargetState": 104
+    },
+    {
+      "InteractID": 1070105,
+      "SrcState": 107,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 1080105,
+      "SrcState": 108,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 1090105,
+      "SrcState": 109,
+      "TargetState": 105
+    },
+    {
+      "InteractID": 1080106,
+      "SrcState": 108,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 1090106,
+      "SrcState": 109,
+      "TargetState": 106
+    },
+    {
+      "InteractID": 1090107,
+      "SrcState": 109,
+      "TargetState": 107
+    },
+    {
+      "InteractID": 1010001,
+      "SrcState": 101,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1020001,
+      "SrcState": 102,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1030001,
+      "SrcState": 103,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1040001,
+      "SrcState": 104,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1050001,
+      "SrcState": 105,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1060001,
+      "SrcState": 106,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1070001,
+      "SrcState": 107,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1080001,
+      "SrcState": 108,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1090001,
+      "SrcState": 109,
+      "TargetState": 1
+    },
+    {
+      "InteractID": 1211,
+      "SrcState": 2,
+      "TargetState": 11
+    },
+    {
+      "InteractID": 1010002,
+      "SrcState": 101,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1020002,
+      "SrcState": 102,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1030002,
+      "SrcState": 103,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1040002,
+      "SrcState": 104,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1050002,
+      "SrcState": 105,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1060002,
+      "SrcState": 106,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1070002,
+      "SrcState": 107,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1080002,
+      "SrcState": 108,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 1090002,
+      "SrcState": 109,
+      "TargetState": 2
+    },
+    {
+      "InteractID": 900020,
+      "SrcState": 0,
+      "TargetState": 20
+    },
+    {
+      "InteractID": 901020,
+      "SrcState": 1,
+      "TargetState": 20
+    },
+    {
+      "InteractID": 902020,
+      "SrcState": 2,
+      "TargetState": 20
+    }
+  ]
+}

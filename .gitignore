@@ -1,34 +1,54 @@
-# compiled output
+# ---------------------------------------------------------------------------
+# Build output and machine-local state. None of this belongs in the repository.
+# ---------------------------------------------------------------------------
+
+# compiled server
 /dist
-/node_modules
 /build
-.history
 
-# ============================================================
-# 排除规则（FireFly 目录在下方显式放行）
-# ============================================================
+# dependencies - install.bat restores them with `npm install`
+/node_modules
 
-# 证书与私钥
+# private Node.js copy that install.bat downloads (about 100 MB)
+/runtime/*
+!/runtime/client/
+!/runtime/kcp/
+__pycache__/
+*.py[cod]
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# save file: created automatically on first start from the freesr profile
+/src/data/data-in-game.json
+/src/data/grid-fight-runs.json
+/server.config.json
+.env
+.env.*
+!.env.example
+
+# the protocol runtime is generated from src/proto/StarRail.proto
+# (about 55 MB) by `node tools/gen-proto.js`
+/src/proto/starrail.gen.js
+/src/proto/starrail.ts
+/src/proto/.inputs.sha256
+/src/proto/4.7.51/schema.json
+/src/proto/4.7.51/CmdId.json
+/src/proto/4.7.51/handler-commands.json
+
+# ---------------------------------------------------------------------------
+# Optional local integration tools and private certificates
+/FireFly.Proxy.v2/
+/launcher/
 *.pfx
 *.p12
 *.key
+*.pem
+# ---------------------------------------------------------------------------
 
-# 其它二进制
-*.exe
-*.dll
-*.sys
-*.so
-*.dylib
-
-# ============================================================
-# FireFly 代理工具：整体入库
-#   rootCert.pfx 经核实为该工具的公开发行默认证书
-#   （CN=Titanium Root Certificate Authority，与独立发行包内文件 SHA256 一致）
-#   git 规则「后写的覆盖先写的」，故放行规则必须写在排除规则之后
-# ============================================================
-!FireFly.Proxy.v2/**
-
-# Logs
+# ---------------------------------------------------------------------------
+# Noise
+# ---------------------------------------------------------------------------
 logs
 *.log
 npm-debug.log*
@@ -36,15 +56,17 @@ pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-
-# OS
 .DS_Store
+# editor / OS junk that must not creep in through drag-and-drop on Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*~
+*.swp
 
-# Tests
 /coverage
 /.nyc_output
 
-# IDEs and editors
 /.idea
 .project
 .classpath
@@ -53,29 +75,15 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dotenv environment variable files
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
+# archived development logs (current run logs stay in /logs)
+/dev/logs-archive/
 
-# temp directory
-.temp
-.tmp
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+# isolated verification instance: copied data/logs for a second server on other
+# ports (SASR_* overrides), never committed
+/_e2e/

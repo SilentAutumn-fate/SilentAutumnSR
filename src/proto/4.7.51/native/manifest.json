@@ -1,0 +1,13 @@
+{
+  "client": "OSBETAWin4.7.51",
+  "nativeMessageCount": 4991,
+  "nativeUniqueCommands": 2717,
+  "runtimeCommandNames": 4145,
+  "metadataSha256": "0c77337d2a55238a9ab99fff2c38a911fa5a90fc89b08ca030a712b41cddcf2f",
+  "gameAssemblySha256": "9e712188942258f9f3652b586b71d70b9e6d22d29c3f0bc0d11ae24b1e2fcf51",
+  "files": {
+    "../../StarRail.proto": "adb17d04297db730fa5b7d3612a86b477a4a6030c397082cbc334c5a1a17a8ad",
+    "../../CmdId.json": "a58b2e9e8cafa641f5b044f6eb8f4ffbfdb87787525fbcc2f4988f49e3333405",
+    "aliases.json": "8e6f2990d95fba57279c46fad7f4b9be9b1f3d3ea534ebabe77e7eb1064204f9"
+  }
+}

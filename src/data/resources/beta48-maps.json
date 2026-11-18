@@ -1,0 +1,969 @@
+{
+  "clientVersion": "OSBETAWin4.7.51",
+  "source": "StarRail_Beta/StarRail_Data/Persistent/DesignData/Windows/bc2a4d06b90c439d0494524d16631612.bytes",
+  "sha256": "fcf58a858f01fe0307dbfa0ddf16f288849c19e5e85767e163b31c9c90c549c9",
+  "levelSource": {
+    "path": "StarRail_Beta/StarRail_Data/Persistent/DesignData/Windows/1590d0b90ae9b8bb3f639b10e213703a.bytes",
+    "sha256": "de3a07cd3a948203286f7d3eced7b6232662a1416e7c6c9a42ced0309eaa5483"
+  },
+  "planes": [
+    {
+      "PlaneID": 20581,
+      "PlaneType": "Maze",
+      "SubType": 1,
+      "MazePoolType": 1,
+      "WorldID": 602,
+      "PlaneName": {
+        "Hash": 1210219234,
+        "Hash64": "254343709775969771"
+      },
+      "StartFloorID": 20581001,
+      "FloorIDList": [
+        20581001
+      ],
+      "sourceOffset": 7763598
+    }
+  ],
+  "entrances": [
+    {
+      "ID": 2058101,
+      "EntranceType": "Mission",
+      "PlaneID": 20581,
+      "FloorID": 20581001,
+      "BeginMainMissionList": [],
+      "FinishMainMissionList": [],
+      "FinishSubMissionList": [],
+      "sourceOffset": 7268718
+    },
+    {
+      "ID": 2058102,
+      "EntranceType": "Mission",
+      "PlaneID": 20581,
+      "FloorID": 20581001,
+      "StartGroupID": 155,
+      "StartAnchorID": 1,
+      "BeginMainMissionList": [],
+      "FinishMainMissionList": [],
+      "FinishSubMissionList": [],
+      "sourceOffset": 7268734
+    },
+    {
+      "ID": 2058104,
+      "EntranceType": "Town",
+      "PlaneID": 20581,
+      "FloorID": 20581001,
+      "StartGroupID": 157,
+      "StartAnchorID": 1,
+      "BeginMainMissionList": [],
+      "FinishMainMissionList": [],
+      "FinishSubMissionList": [],
+      "sourceOffset": 7268753
+    },
+    {
+      "ID": 2058105,
+      "EntranceType": "Town",
+      "PlaneID": 20581,
+      "FloorID": 20581001,
+      "StartGroupID": 159,
+      "StartAnchorID": 1,
+      "BeginMainMissionList": [],
+      "FinishMainMissionList": [],
+      "FinishSubMissionList": [],
+      "sourceOffset": 7268772
+    }
+  ],
+  "scenes": [
+    {
+      "planeID": 20581,
+      "entryID": 2058101,
+      "props": [],
+      "monsters": [],
+      "teleports": [
+        {
+          "groupId": 160,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058101,
+          "pos": {
+            "x": -113028,
+            "y": -754383,
+            "z": -28342
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 155,
+          "anchorId": 1,
+          "pos": {
+            "x": 30330,
+            "y": -821371,
+            "z": -405260
+          },
+          "rot": {
+            "x": 0,
+            "y": 139020,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 157,
+          "anchorId": 1,
+          "pos": {
+            "x": -84850,
+            "y": -770645,
+            "z": -425430
+          },
+          "rot": {
+            "x": 0,
+            "y": 153084,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 159,
+          "anchorId": 1,
+          "pos": {
+            "x": -77580,
+            "y": -769785,
+            "z": -440707
+          },
+          "rot": {
+            "x": 0,
+            "y": 157057,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 160,
+          "anchorId": 2,
+          "instId": 300002,
+          "teleportId": 2058102,
+          "pos": {
+            "x": -113023,
+            "y": -764226,
+            "z": -152118
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 3,
+          "instId": 300003,
+          "teleportId": 2058103,
+          "pos": {
+            "x": -113023,
+            "y": -764226,
+            "z": -312009
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 4,
+          "instId": 300004,
+          "teleportId": 2058104,
+          "pos": {
+            "x": -2614,
+            "y": -770645,
+            "z": -367389
+          },
+          "rot": {
+            "x": 0,
+            "y": 198413,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 5,
+          "instId": 300005,
+          "teleportId": 2058105,
+          "pos": {
+            "x": -140530,
+            "y": -775508,
+            "z": -392040
+          },
+          "rot": {
+            "x": 0,
+            "y": 307225,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 161,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058106,
+          "pos": {
+            "x": -194592,
+            "y": -16422,
+            "z": 306774
+          },
+          "rot": {
+            "x": 0,
+            "y": 165000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 162,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058107,
+          "pos": {
+            "x": -172550,
+            "y": 182668,
+            "z": 265520
+          },
+          "rot": {
+            "x": 0,
+            "y": 207108,
+            "z": 0
+          }
+        }
+      ]
+    },
+    {
+      "planeID": 20581,
+      "entryID": 2058102,
+      "props": [],
+      "monsters": [],
+      "teleports": [
+        {
+          "groupId": 155,
+          "anchorId": 1,
+          "pos": {
+            "x": 30330,
+            "y": -821371,
+            "z": -405260
+          },
+          "rot": {
+            "x": 0,
+            "y": 139020,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 157,
+          "anchorId": 1,
+          "pos": {
+            "x": -84850,
+            "y": -770645,
+            "z": -425430
+          },
+          "rot": {
+            "x": 0,
+            "y": 153084,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 159,
+          "anchorId": 1,
+          "pos": {
+            "x": -77580,
+            "y": -769785,
+            "z": -440707
+          },
+          "rot": {
+            "x": 0,
+            "y": 157057,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 160,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058101,
+          "pos": {
+            "x": -113028,
+            "y": -754383,
+            "z": -28342
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 2,
+          "instId": 300002,
+          "teleportId": 2058102,
+          "pos": {
+            "x": -113023,
+            "y": -764226,
+            "z": -152118
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 3,
+          "instId": 300003,
+          "teleportId": 2058103,
+          "pos": {
+            "x": -113023,
+            "y": -764226,
+            "z": -312009
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 4,
+          "instId": 300004,
+          "teleportId": 2058104,
+          "pos": {
+            "x": -2614,
+            "y": -770645,
+            "z": -367389
+          },
+          "rot": {
+            "x": 0,
+            "y": 198413,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 5,
+          "instId": 300005,
+          "teleportId": 2058105,
+          "pos": {
+            "x": -140530,
+            "y": -775508,
+            "z": -392040
+          },
+          "rot": {
+            "x": 0,
+            "y": 307225,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 161,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058106,
+          "pos": {
+            "x": -194592,
+            "y": -16422,
+            "z": 306774
+          },
+          "rot": {
+            "x": 0,
+            "y": 165000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 162,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058107,
+          "pos": {
+            "x": -172550,
+            "y": 182668,
+            "z": 265520
+          },
+          "rot": {
+            "x": 0,
+            "y": 207108,
+            "z": 0
+          }
+        }
+      ]
+    },
+    {
+      "planeID": 20581,
+      "entryID": 2058104,
+      "props": [],
+      "monsters": [],
+      "teleports": [
+        {
+          "groupId": 157,
+          "anchorId": 1,
+          "pos": {
+            "x": -84850,
+            "y": -770645,
+            "z": -425430
+          },
+          "rot": {
+            "x": 0,
+            "y": 153084,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 155,
+          "anchorId": 1,
+          "pos": {
+            "x": 30330,
+            "y": -821371,
+            "z": -405260
+          },
+          "rot": {
+            "x": 0,
+            "y": 139020,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 159,
+          "anchorId": 1,
+          "pos": {
+            "x": -77580,
+            "y": -769785,
+            "z": -440707
+          },
+          "rot": {
+            "x": 0,
+            "y": 157057,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 160,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058101,
+          "pos": {
+            "x": -113028,
+            "y": -754383,
+            "z": -28342
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 2,
+          "instId": 300002,
+          "teleportId": 2058102,
+          "pos": {
+            "x": -113023,
+            "y": -764226,
+            "z": -152118
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 3,
+          "instId": 300003,
+          "teleportId": 2058103,
+          "pos": {
+            "x": -113023,
+            "y": -764226,
+            "z": -312009
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 4,
+          "instId": 300004,
+          "teleportId": 2058104,
+          "pos": {
+            "x": -2614,
+            "y": -770645,
+            "z": -367389
+          },
+          "rot": {
+            "x": 0,
+            "y": 198413,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 5,
+          "instId": 300005,
+          "teleportId": 2058105,
+          "pos": {
+            "x": -140530,
+            "y": -775508,
+            "z": -392040
+          },
+          "rot": {
+            "x": 0,
+            "y": 307225,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 161,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058106,
+          "pos": {
+            "x": -194592,
+            "y": -16422,
+            "z": 306774
+          },
+          "rot": {
+            "x": 0,
+            "y": 165000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 162,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058107,
+          "pos": {
+            "x": -172550,
+            "y": 182668,
+            "z": 265520
+          },
+          "rot": {
+            "x": 0,
+            "y": 207108,
+            "z": 0
+          }
+        }
+      ]
+    },
+    {
+      "planeID": 20581,
+      "entryID": 2058105,
+      "props": [],
+      "monsters": [],
+      "teleports": [
+        {
+          "groupId": 159,
+          "anchorId": 1,
+          "pos": {
+            "x": -77580,
+            "y": -769785,
+            "z": -440707
+          },
+          "rot": {
+            "x": 0,
+            "y": 157057,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 155,
+          "anchorId": 1,
+          "pos": {
+            "x": 30330,
+            "y": -821371,
+            "z": -405260
+          },
+          "rot": {
+            "x": 0,
+            "y": 139020,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 157,
+          "anchorId": 1,
+          "pos": {
+            "x": -84850,
+            "y": -770645,
+            "z": -425430
+          },
+          "rot": {
+            "x": 0,
+            "y": 153084,
+            "z": 0
+          },
+          "teleportId": 0
+        },
+        {
+          "groupId": 160,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058101,
+          "pos": {
+            "x": -113028,
+            "y": -754383,
+            "z": -28342
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 2,
+          "instId": 300002,
+          "teleportId": 2058102,
+          "pos": {
+            "x": -113023,
+            "y": -764226,
+            "z": -152118
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 3,
+          "instId": 300003,
+          "teleportId": 2058103,
+          "pos": {
+            "x": -113023,
+            "y": -764226,
+            "z": -312009
+          },
+          "rot": {
+            "x": 0,
+            "y": 180000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 4,
+          "instId": 300004,
+          "teleportId": 2058104,
+          "pos": {
+            "x": -2614,
+            "y": -770645,
+            "z": -367389
+          },
+          "rot": {
+            "x": 0,
+            "y": 198413,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 160,
+          "anchorId": 5,
+          "instId": 300005,
+          "teleportId": 2058105,
+          "pos": {
+            "x": -140530,
+            "y": -775508,
+            "z": -392040
+          },
+          "rot": {
+            "x": 0,
+            "y": 307225,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 161,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058106,
+          "pos": {
+            "x": -194592,
+            "y": -16422,
+            "z": 306774
+          },
+          "rot": {
+            "x": 0,
+            "y": 165000,
+            "z": 0
+          }
+        },
+        {
+          "groupId": 162,
+          "anchorId": 1,
+          "instId": 300001,
+          "teleportId": 2058107,
+          "pos": {
+            "x": -172550,
+            "y": 182668,
+            "z": 265520
+          },
+          "rot": {
+            "x": 0,
+            "y": 207108,
+            "z": 0
+          }
+        }
+      ]
+    }
+  ],
+  "checkpoints": [
+    {
+      "groupId": 160,
+      "anchorId": 1,
+      "name": "CheckPoint01",
+      "sourceOffset": 129327284,
+      "xyz": [
+        -113.0280990600586,
+        -754.3831787109375,
+        -28.341630935668945
+      ],
+      "rotY": 180,
+      "pos": {
+        "x": -113028,
+        "y": -754383,
+        "z": -28342
+      },
+      "rot": {
+        "x": 0,
+        "y": 180000,
+        "z": 0
+      },
+      "teleportId": 2058101,
+      "instId": 300001,
+      "propReference": {
+        "AnchorGroupID": 160,
+        "AnchorID": 1,
+        "MappingInfoID": 2058101,
+        "sourceOffset": 129327533,
+        "hex": "a00101f5ce7d",
+        "schema": "LevelPropInfo AnchorGroupID@0xA8 AnchorID@0xAC MappingInfoID@0xB4; ChestID omitted by presence mask"
+      }
+    },
+    {
+      "groupId": 160,
+      "anchorId": 2,
+      "name": "CheckPoint02",
+      "sourceOffset": 129327315,
+      "xyz": [
+        -113.02259826660156,
+        -764.226318359375,
+        -152.11810302734375
+      ],
+      "rotY": 180,
+      "pos": {
+        "x": -113023,
+        "y": -764226,
+        "z": -152118
+      },
+      "rot": {
+        "x": 0,
+        "y": 180000,
+        "z": 0
+      },
+      "teleportId": 2058102,
+      "instId": 300002,
+      "propReference": {
+        "AnchorGroupID": 160,
+        "AnchorID": 2,
+        "MappingInfoID": 2058102,
+        "sourceOffset": 129327655,
+        "hex": "a00102f6ce7d",
+        "schema": "LevelPropInfo AnchorGroupID@0xA8 AnchorID@0xAC MappingInfoID@0xB4; ChestID omitted by presence mask"
+      }
+    },
+    {
+      "groupId": 160,
+      "anchorId": 3,
+      "name": "CheckPoint03",
+      "sourceOffset": 129327346,
+      "xyz": [
+        -113.02290344238281,
+        -764.226318359375,
+        -312.0089111328125
+      ],
+      "rotY": 180,
+      "pos": {
+        "x": -113023,
+        "y": -764226,
+        "z": -312009
+      },
+      "rot": {
+        "x": 0,
+        "y": 180000,
+        "z": 0
+      },
+      "teleportId": 2058103,
+      "instId": 300003,
+      "propReference": {
+        "AnchorGroupID": 160,
+        "AnchorID": 3,
+        "MappingInfoID": 2058103,
+        "sourceOffset": 129327777,
+        "hex": "a00103f7ce7d",
+        "schema": "LevelPropInfo AnchorGroupID@0xA8 AnchorID@0xAC MappingInfoID@0xB4; ChestID omitted by presence mask"
+      }
+    },
+    {
+      "groupId": 160,
+      "anchorId": 4,
+      "name": "CheckPoint04",
+      "sourceOffset": 129327377,
+      "xyz": [
+        -2.6139891147613525,
+        -770.644775390625,
+        -367.3893127441406
+      ],
+      "rotY": 198.41250610351562,
+      "pos": {
+        "x": -2614,
+        "y": -770645,
+        "z": -367389
+      },
+      "rot": {
+        "x": 0,
+        "y": 198413,
+        "z": 0
+      },
+      "teleportId": 2058104,
+      "instId": 300004,
+      "propReference": {
+        "AnchorGroupID": 160,
+        "AnchorID": 4,
+        "MappingInfoID": 2058104,
+        "sourceOffset": 129327898,
+        "hex": "a00104f8ce7d",
+        "schema": "LevelPropInfo AnchorGroupID@0xA8 AnchorID@0xAC MappingInfoID@0xB4; ChestID omitted by presence mask"
+      }
+    },
+    {
+      "groupId": 160,
+      "anchorId": 5,
+      "name": "CheckPoint05",
+      "sourceOffset": 129327408,
+      "xyz": [
+        -140.52999877929688,
+        -775.5078735351562,
+        -392.0400085449219
+      ],
+      "rotY": 307.2247009277344,
+      "pos": {
+        "x": -140530,
+        "y": -775508,
+        "z": -392040
+      },
+      "rot": {
+        "x": 0,
+        "y": 307225,
+        "z": 0
+      },
+      "teleportId": 2058105,
+      "instId": 300005,
+      "propReference": {
+        "AnchorGroupID": 160,
+        "AnchorID": 5,
+        "MappingInfoID": 2058105,
+        "sourceOffset": 129328019,
+        "hex": "a00105f9ce7d",
+        "schema": "LevelPropInfo AnchorGroupID@0xA8 AnchorID@0xAC MappingInfoID@0xB4; ChestID omitted by presence mask"
+      }
+    },
+    {
+      "groupId": 161,
+      "anchorId": 1,
+      "name": "CheckPoint01",
+      "sourceOffset": 129330637,
+      "xyz": [
+        -194.5919952392578,
+        -16.421539306640625,
+        306.77398681640625
+      ],
+      "rotY": 165,
+      "pos": {
+        "x": -194592,
+        "y": -16422,
+        "z": 306774
+      },
+      "rot": {
+        "x": 0,
+        "y": 165000,
+        "z": 0
+      },
+      "teleportId": 2058106,
+      "instId": 300001,
+      "propReference": {
+        "AnchorGroupID": 161,
+        "AnchorID": 1,
+        "MappingInfoID": 2058106,
+        "sourceOffset": 129330762,
+        "hex": "a10101face7d",
+        "schema": "LevelPropInfo AnchorGroupID@0xA8 AnchorID@0xAC MappingInfoID@0xB4; ChestID omitted by presence mask"
+      }
+    },
+    {
+      "groupId": 162,
+      "anchorId": 1,
+      "name": "CheckPoint01",
+      "sourceOffset": 129330866,
+      "xyz": [
+        -172.5500030517578,
+        182.6678924560547,
+        265.5199890136719
+      ],
+      "rotY": 207.1083984375,
+      "pos": {
+        "x": -172550,
+        "y": 182668,
+        "z": 265520
+      },
+      "rot": {
+        "x": 0,
+        "y": 207108,
+        "z": 0
+      },
+      "teleportId": 2058107,
+      "instId": 300001,
+      "propReference": {
+        "AnchorGroupID": 162,
+        "AnchorID": 1,
+        "MappingInfoID": 2058107,
+        "sourceOffset": 129330991,
+        "hex": "a20101fbce7d",
+        "schema": "LevelPropInfo AnchorGroupID@0xA8 AnchorID@0xAC MappingInfoID@0xB4; ChestID omitted by presence mask"
+      }
+    }
+  ],
+  "defaultSpawnPolicy": "Use each entrance StartGroupID/StartAnchorID; entry2058101 has no client default, so select verified checkpoint2058101.",
+  "limitations": [
+    "Scenes are a minimal entrance-anchor scaffold: no teleportId is fabricated, no live teleport verified, scene NPC/monster/props omitted.",
+    "New means absent from installed server resource, not necessarily added specifically in 4.8. 30148 Challenge and 40581 Raid are excluded from scenes.",
+    "20581 G155 is 480BangbooActivityEntry; G157 MainMission8048208_01; G159 MainMission8048209_01."
+  ]
+}

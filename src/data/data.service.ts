@@ -1,238 +1,285 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import * as fs from 'fs';
 import * as path from 'path';
-import * as fs from 'fs-extra';
-import { join } from 'path';
-import { readdirSync, statSync } from 'fs';
-import { fetchVersionData } from './FetchHotfix/fetch';
+import { AvatarJson, JsonData, resolveDataPath } from './loadFreeData';
+import { DataInGame, SceneJson } from './loadDataInGame';
+import { ConfigManager } from '../game-server/manager/config_mgr';
 import {
-    fetchHotfixFromServer,
-    selectHost,
-    VersionEntry,
-} from './FetchHotfix/versionChain';
-import { JsonData } from './loadFreeData';
-import { DataInGame } from './loadDataInGame';
-import { GameResources } from './loadResources';
-import { NetSession } from 'src/game-server/NetSession';
-import { starrail } from 'src/proto/starrail';
-import { CmdID } from 'src/proto/cmdId';
+    DEFAULT_ENTRY_ID,
+    DEFAULT_FLOOR_ID,
+    DEFAULT_NICKNAME,
+    DEFAULT_PLANE_ID,
+    M7_AVATAR_IDS,
+    MC_AVATAR_IDS,
+} from '../common/constants';
 
+import type { VersionEntry } from './hotfix-sources';
 
-export interface VersionConfig {
-    [key: string]: {
-        asset_bundle_url: string;
-        ex_resource_url: string;
-        lua_url: string;
-        lua_version: string;
-        ifixUrl: string;
-    };
-}
+/**
+ * The entry shape lives in hotfix-sources.ts so the resolver, the CLI, and the
+ * tests share one definition; re-exported here for existing callers.
+ */
+export type { VersionEntry };
 
+export type VersionConfig = { [version: string]: VersionEntry };
+
+/**
+ * Owns everything the server reads off disk:
+ *   src/data/version.json         - version chain served by query_gateway
+ *   src/data/freesr-data.json     - freesr account profile (lightcones/relics/avatars/battle)
+ *   src/data/data-in-game.json    - persisted world state (lineups/position/scene)
+ *   src/data/resources/*.json     - static design data, via ConfigManager
+ *
+ * Paths are resolved from process.cwd() so the server can be started from the
+ * project root without copying data files into dist/.
+ */
 @Injectable()
 export class DataService {
-    private dataVersion: VersionConfig;
-    private dirFolderGame: string | null;
-    private dataJson: JsonData
-    private dataInGame: DataInGame
-    private dataRecourse: GameResources
-    private mainId: number
-    private march7Id: number
-    /** 抓取失败版本的负缓存（版本 -> 失败时间戳），避免反复打官方接口 */
-    private versionFetchFailedAt: Map<string, number> = new Map();
-    constructor() {
-        // version input
-        const filePathVersion = path.resolve(process.cwd(),'./src/data/version.json');
-        const fileContentsVersion = fs.readFileSync(filePathVersion, 'utf-8');
-        this.dataVersion = JSON.parse(fileContentsVersion) as VersionConfig;
+    private readonly logger = new Logger(DataService.name);
 
-        //Check exist folder game
-        this.dirFolderGame = null;
-        this.checkStarRailFolders()
+    private dataVersion: VersionConfig = {};
+    private dataJson: JsonData = new JsonData();
+    private dataInGame: DataInGame = new DataInGame();
 
-        //Data Json
-        this.dataJson = new JsonData();
-        this.updateDataJson()
+    /** Primary (Trailblazer) and March 7th multipath selections. */
+    private mainId = 8006;
+    private march7Id = 1224;
 
-        //Data In-game
-        this.dataInGame = new DataInGame();
-        this.updateDataInGame()
+    constructor(public readonly config: ConfigManager) {}
 
-        //load GameResources
-        this.dataRecourse = new GameResources();
-        this.updateDataResource()
+    // ---- bootstrap ---------------------------------------------------------
 
-        this.mainId = 8006
-        this.march7Id = 1224
+    public loadAll(): void {
+        this.loadVersion();
+        this.config.load();
+        this.loadFreeData();
+        this.loadDataInGame();
+        this.logger.log(
+            `data loaded: versions=${Object.keys(this.dataVersion).length} ` +
+                `avatars=${this.dataJson.avatarIds().length} ` +
+                `relics=${this.dataJson.relics.length} ` +
+                `lightcones=${this.dataJson.lightcones.length} ` +
+                `scenes=${this.config.sceneConfig.size}`,
+        );
     }
 
-    getVersionData(): VersionConfig {
+    private loadVersion(): void {
+        const file = resolveDataPath('version.json');
+        if (!fs.existsSync(file)) {
+            this.logger.warn(`version.json not found at ${file}`);
+            this.dataVersion = {};
+            return;
+        }
+        this.dataVersion = JSON.parse(fs.readFileSync(file, 'utf-8'));
+    }
+
+    private loadFreeData(): void {
+        const file = resolveDataPath('freesr-data.json');
+        if (!fs.existsSync(file)) {
+            this.logger.warn(`freesr-data.json not found at ${file}`);
+        } else {
+            this.dataJson.loadFromObject(JSON.parse(fs.readFileSync(file, 'utf-8')));
+        }
+
+        // The design table also contains NPC, story and trial variants. Only
+        // avatars whose adventure ID is their own can be added to the roster.
+        for (const avatar of this.config.avatarConfig.values()) {
+            const id = avatar.AvatarID;
+            if (avatar.Release !== true || avatar.AdventurePlayerID !== id ||
+                (id >= 8001 && !MC_AVATAR_IDS.includes(id)) || this.dataJson.avatar(id)) {
+                continue;
+            }
+            const family = MC_AVATAR_IDS.includes(id)
+                ? MC_AVATAR_IDS.filter((pathId) => pathId % 2 === id % 2)
+                : M7_AVATAR_IDS.includes(id) ? M7_AVATAR_IDS : [];
+            const siblings = family.map((pathId) => this.dataJson.avatar(pathId));
+            const skills = Object.fromEntries(
+                this.config.skillTreeOf(id)
+                    .filter((point) => point.DefaultUnlock && point.Level === 1)
+                    .map((point) => [point.PointID, 1]),
+            );
+            this.dataJson.avatars[id] = AvatarJson.fromJson({
+                avatar_id: id,
+                level: Math.max(1, ...siblings.map((path) => path?.level ?? 1)),
+                promotion: Math.max(0, ...siblings.map((path) => path?.promotion ?? 0)),
+                data: { skills },
+            });
+        }
+    }
+
+    private loadDataInGame(): void {
+        const file = resolveDataPath('data-in-game.json');
+        if (!fs.existsSync(file)) {
+            // A fresh checkout has no save file (it is a mutable runtime file and
+            // is git-ignored). Without a starting lineup the scene would have no
+            // actor entities and no leader, and the client could not spawn, so
+            // seed a valid one derived from the profile and write it out.
+            this.logger.log(`no save file yet at ${file}; creating a default one`);
+            this.dataInGame = this.seedDataInGame();
+            void this.saveDataInGame();
+            return;
+        }
+        this.dataInGame = DataInGame.fromJson(JSON.parse(fs.readFileSync(file, 'utf-8')));
+        // Restore the persisted multipath selection so lineups resolve correctly
+        // from the very first request after a restart.
+        const { mcPathId, march7PathId } = this.dataInGame.player;
+        if (mcPathId && MC_AVATAR_IDS.includes(mcPathId) && this.dataJson.avatar(mcPathId)) {
+            this.mainId = mcPathId;
+        }
+        if (march7PathId && M7_AVATAR_IDS.includes(march7PathId) && this.dataJson.avatar(march7PathId)) {
+            this.march7Id = march7PathId;
+        }
+    }
+
+    /**
+     * A minimal, valid starting save: the default free-roam scene plus a party
+     * built from whatever avatars the profile owns (Trailblazer leading).
+     */
+    private seedDataInGame(): DataInGame {
+        const save = new DataInGame();
+        save.scene = new SceneJson(DEFAULT_PLANE_ID, DEFAULT_FLOOR_ID, DEFAULT_ENTRY_ID);
+        save.player.nickname = DEFAULT_NICKNAME;
+
+        const ids = this.dataJson.avatarIds();
+        if (ids.length > 0) {
+            // The Trailblazer is the highest multipath id in the profile; using it
+            // as the leader exercises the path resolution in the lineups.
+            const leader = this.dataJson.avatar(this.mainId) ? this.mainId : ids[0];
+            const party = [leader, ...ids.filter((id) =>
+                id !== leader && !MC_AVATAR_IDS.includes(id) && id !== 1224,
+            ).slice(0, 3)];
+            save.lineups = Object.fromEntries(party.map((id, slot) => [String(slot), id]));
+        } else {
+            this.logger.warn('the freesr profile owns no avatars; the party will be empty');
+        }
+
+        save.player.mcPathId = this.mainId;
+        save.player.march7PathId = this.march7Id;
+        return save;
+    }
+
+    // ---- versions ----------------------------------------------------------
+
+    public getVersionData(): VersionConfig {
         return this.dataVersion;
     }
 
-    async getUpdateIdChar(id: number, player: NetSession) {
-        let avatarType: starrail.MultiPathAvatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_None;
-        switch (id) {
-            case 8001:
-                this.mainId = 8001
-                avatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_BoyWarriorType;
-                break;
-            case 8002:
-                this.mainId = 8002
-                avatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_GirlWarriorType;
-                break;
-            case 8003:
-                this.mainId = 8003
-                avatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_BoyKnightType;
-                break;
-            case 8004:
-                this.mainId = 8004
-                avatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_GirlKnightType;
-                break;
-            case 8005:
-                this.mainId = 8005
-                avatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_BoyShamanType;
-                break;
-            case 8006:
-                this.mainId = 8006
-                avatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_GirlShamanType;
-                break;
-            case 1224:
-                this.march7Id = 1224
-                avatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_Mar7ThRogueType;
-                break;
-            case 1001:
-                this.march7Id = 1001
-                avatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_Mar7ThKnightType;
-                break;
-            default:
-                avatarType = starrail.MultiPathAvatarType.MultiPathAvatarType_None;
-                break;
-        }
-        const proto1 = new starrail.SetAvatarPathScRsp({
-            retcode: 0,
-            avatarId: avatarType
-        });
-        const bufferData1 = starrail.SetAvatarPathScRsp.encode(proto1).finish();
-        await player.send(CmdID.CmdSetAvatarPathScRsp, bufferData1);
+    public hasVersion(version: string): boolean {
+        return !!this.dataVersion[version];
     }
 
-    getDataJson() : JsonData{
+    /** Persist version.json after a successful hotfix lookup. */
+    public saveVersion(): void {
+        const file = resolveDataPath('version.json');
+        try {
+            fs.writeFileSync(file, JSON.stringify(this.dataVersion, null, 2) + '\n', 'utf-8');
+        } catch (err: any) {
+            this.logger.error(`failed to persist version.json: ${err?.message ?? err}`);
+        }
+    }
+
+    // ---- freesr profile ----------------------------------------------------
+
+    public getDataJson(): JsonData {
         return this.dataJson;
     }
 
-    getDataInGame() : DataInGame {
+    /** Re-read freesr-data.json from disk (in-game `/update`). */
+    public async updateDataJson(): Promise<void> {
+        this.dataJson = new JsonData();
+        this.loadFreeData();
+    }
+
+    public getIdMain(): number {
+        return this.mainId;
+    }
+
+    public getIdM7(): number {
+        return this.march7Id;
+    }
+
+    public setMainId(id: number): void {
+        // Guard the multipath selection: a malformed SetAvatarPathCsReq (or a
+        // future one carrying a path id we do not know) must not blank it out,
+        // because every lineup then fails to resolve the Trailblazer.
+        if (!MC_AVATAR_IDS.includes(id)) {
+            this.logger.warn(`ignoring invalid Trailblazer path id ${id}`);
+            return;
+        }
+        this.mainId = id;
+        this.dataInGame.player = { ...this.dataInGame.player, mcPathId: id };
+    }
+
+    public setMarch7Id(id: number): void {
+        if (!M7_AVATAR_IDS.includes(id)) {
+            this.logger.warn(`ignoring invalid March 7th path id ${id}`);
+            return;
+        }
+        this.march7Id = id;
+        this.dataInGame.player = { ...this.dataInGame.player, march7PathId: id };
+    }
+
+    // ---- persisted world state --------------------------------------------
+
+    public getDataInGame(): DataInGame {
         return this.dataInGame;
     }
-    getIdMain() {
-        return this.mainId
-    }
-    getIdM7() {
-        return this.march7Id
-    }
-    getDataResource() : GameResources {
-        return this.dataRecourse;
-    }
 
-    checkStarRailFolders = () => {
-        const baseDir = join(__dirname, '..', '..');
-        const targetFolders = ['Star Rail', 'StarRail'].map(folder => folder.toLowerCase());
-        const directories = readdirSync(baseDir).filter(file => {
-            const fullPath = join(baseDir, file);
-            return statSync(fullPath).isDirectory();
-        });
-    
-        const foundFolders = directories.filter(directory => 
-            targetFolders.some(target => directory.toLowerCase().startsWith(target))
-        );
-    
-        if (foundFolders.length > 0) {
-            this.dirFolderGame = join(__dirname, '..', '..', foundFolders[0]);
-            console.log("Folder game detected: ", this.dirFolderGame)
-        } 
-    };
-
-    saveVersion() {
-        const filePathVersion = path.resolve(process.cwd(), './src/data/version.json');
-        const updatedContentsVersion = JSON.stringify(this.dataVersion, null, 2);
-        fs.writeFileSync(filePathVersion, updatedContentsVersion, 'utf-8');
+    public async updateDataInGame(): Promise<void> {
+        this.dataInGame = new DataInGame();
+        this.loadDataInGame();
     }
 
     /**
-     * 自动补全缺失版本的 hotfix 信息（对齐 pearl-sr 的 dispatch 行为）。
+     * Supplies the current connection's PlayerState snapshot at save time.
      *
-     * 路径 1：本地存在游戏目录时，用 BinaryVersion.bytes 反推（原有逻辑）
-     * 路径 2：直接向官方 dispatch 查询 —— 没有客户端也能续版本链
+     * Handlers call `saveDataInGame()` from every setter, so the account block
+     * has to be harvested here rather than passed in by each caller. Only one
+     * game connection is served at a time in practice, so a single provider is
+     * enough; the most recently connected session wins.
      */
-    async autoUpdateVersion(version: string, dispatchSeed = ''): Promise<boolean> {
-        // ---- 路径 1：本地客户端 ----
-        if (this.dirFolderGame) {
-            const dataReturn = await fetchVersionData(this.dirFolderGame)
-            if (dataReturn && dataReturn.asset_bundle_url) {
-                this.dataVersion[version] = dataReturn;
-                this.saveVersion()
-                console.log(`[version] ${version} 已通过本地客户端解析写入 version.json`)
-                return true
+    private playerSaveProvider: (() => Record<string, any>) | null = null;
+
+    public registerPlayerSaveProvider(provider: () => Record<string, any>): void {
+        this.playerSaveProvider = provider;
+    }
+
+    private saveChain: Promise<void> = Promise.resolve();
+
+    /**
+     * Persist data-in-game.json. Writes are serialised so a burst of
+     * SceneEntityMove packets cannot interleave and corrupt the file.
+     */
+    public saveDataInGame(): Promise<void> {
+        if (this.playerSaveProvider) {
+            try {
+                this.dataInGame.player = {
+                    ...this.dataInGame.player,
+                    ...this.playerSaveProvider(),
+                };
+            } catch (err: any) {
+                this.logger.warn(`could not snapshot player state: ${err?.message ?? err}`);
             }
         }
+        // Re-read path ids so a reload after a multipath switch is consistent.
+        this.dataInGame.player.mcPathId = this.mainId;
+        this.dataInGame.player.march7PathId = this.march7Id;
 
-        // ---- 路径 2：官方 dispatch ----
-        const result = await fetchHotfixFromServer(version, dispatchSeed)
-        if (result.ok && result.entry) {
-            this.dataVersion[version] = result.entry
-            this.saveVersion()
-            console.log(`[version] ${version} 已从官方 hotfix 写入 version.json`)
-            return true
-        }
-        console.warn(`[version] ${version} 抓取失败: ${result.reason}`)
-        return false
+        const snapshot = JSON.stringify(this.dataInGame.toJson(), null, 2);
+        const file = resolveDataPath('data-in-game.json');
+        this.saveChain = this.saveChain
+            .then(async () => {
+                await fs.promises.mkdir(path.dirname(file), { recursive: true });
+                await fs.promises.writeFile(file, snapshot, 'utf-8');
+            })
+            .catch((err) => {
+                this.logger.error(`failed to persist data-in-game.json: ${err?.message ?? err}`);
+            });
+        return this.saveChain;
     }
 
-    /**
-     * 供 HTTP 层使用：确保版本存在；缺失则自动抓取并落盘。
-     * 带 60s 负缓存，避免客户端反复请求不存在的版本时持续打官方接口。
-     */
-    async ensureVersion(version: string, dispatchSeed = ''): Promise<VersionEntry | null> {
-        const existing = this.dataVersion[version]
-        if (existing && existing.asset_bundle_url) return existing
-
-        // 前缀不认识则不可能抓到，直接判定不支持
-        if (!selectHost(version)) return null
-
-        const COOLDOWN_MS = 60_000
-        const lastFail = this.versionFetchFailedAt.get(version)
-        if (lastFail && Date.now() - lastFail < COOLDOWN_MS) return null
-
-        if (await this.autoUpdateVersion(version, dispatchSeed)) {
-            this.versionFetchFailedAt.delete(version)
-            return this.dataVersion[version]
-        }
-
-        this.versionFetchFailedAt.set(version, Date.now())
-        return null
-    }
-
-    /** 列出版本链中已有的版本（便于排查客户端实际请求的版本号） */
-    listVersions(): string[] {
-        return Object.keys(this.dataVersion)
-    }
-
-    async updateDataJson() {
-        const filePathJson = path.resolve(process.cwd(), './src/data/freesr-data.json');
-        this.dataJson = await this.dataJson.loadJson(filePathJson)
-    }
-
-    async updateDataInGame() {
-        const filePathJson = path.resolve(process.cwd(), './src/data/data-in-game.json');
-        this.dataInGame = await this.dataInGame.loadJson(filePathJson)
-    }
-
-    async saveDataLineUp(lineups: { [key: string]: number }) {
-        const filePathJson = path.resolve(process.cwd(), './src/data/data-in-game.json');
-        this.dataInGame.lineups = lineups
-        await this.dataInGame.saveJson(filePathJson)
-    }
-
-    async updateDataResource() {
-        const filePathJson = path.resolve(process.cwd(), './src/data/resources.json');
-        this.dataRecourse = await this.dataRecourse.loadJson(filePathJson)
+    public async saveLineups(lineups: { [key: string]: number }): Promise<void> {
+        this.dataInGame.lineups = lineups;
+        await this.saveDataInGame();
     }
 }
