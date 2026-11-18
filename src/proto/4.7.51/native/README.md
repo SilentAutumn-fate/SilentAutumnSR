@@ -13,18 +13,4 @@ CmdId 原理：解析 `BHGPNEODPMD..cctor`（RVA 14B16440..14B28330）里 Dictio
 
 服务端实际使用`../../StarRail.proto` 和 `../../CmdId.json` 作为原始输入，以此生成 `../schema.json` 和 `../CmdId.json`。生成后的命令表含 4,145 个名称键，但仍只有 2,717 个唯一 wire ID，多出的键是兼容别名。未恢复语义的旧 handler 不会借用旧版命令号。
 
-## 重建
-
-在 `H:/SR_Beta` 执行（Python 需要 pefile、capstone）：
-
-```powershell
-$env:DOTNET_ROOT='H:/SR_Beta/_probe/dotnet-sdk'
-& _probe/HSRGlobalMetadata/bin/Release/net10.0/HSRGlobalMetadata.exe H:/SR_Beta/StarRail_Beta --output H:/SR_Beta/_probe/client-dump-4.7.51-full --no-string-literals
-python SilentAutumnSR/dev/tools/dump-client-proto.py _probe/client-dump-4.7.51-full/dump.cs _probe/client-protocol-4.7.51-full
-python SilentAutumnSR/dev/tools/dump-client-cmdid.py
-SilentAutumnSR/runtime/node/node.exe SilentAutumnSR/dev/tools/refine-client-proto.js _probe/client-protocol-4.7.51-full
-```
-
-CmdId 提取器对本次 GameAssembly SHA256 做强校验；换客户端构建必须重新定位注册表，不能复用硬编码 RVA。proto 原始导出和精修输出分开保存。全量取证保留在 `_probe/client-protocol-4.7.51-full/`，包含属性/字段、原始 schema、未确认项和校验报告。
-
 协议恢复工具参考 Hiro420/Dumpcs2Protobuf；兼容名称/标量编码参考同版本 lcxs1/hsr-local 描述符与 amizing/robinsr 的4.7.51样本。许可证与固定版本来源见上层 README 和 LICENSE-GPL-3.0.txt。
