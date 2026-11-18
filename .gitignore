@@ -40,8 +40,8 @@ __pycache__/
 # Optional local integration tools and private certificates
 /launcher/
 *.pfx
-# Historical public certificate kept outside the proxy working directory.
-!/FireFly.Proxy.v2/archive/rootCert.pfx
+## The original FireFly package includes this historical certificate.
+!/FireFly.Proxy.v2/rootCert.pfx
 *.p12
 *.key
 *.pem
