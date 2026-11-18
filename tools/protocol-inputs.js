@@ -1,0 +1,2 @@
+const fs=require('fs'),path=require('path'),crypto=require('crypto');
+module.exports=function(){const root=path.resolve(__dirname,'..'),h=crypto.createHash('sha256');for(const f of ['StarRail.proto','CmdId.json','4.7.51/handler-field-names.json','4.7.51/handler-enums.json','4.7.51/handler-type-names.json','4.7.51/native/aliases.json'])h.update(fs.readFileSync(path.join(root,'src/proto',f)));return h.digest('hex');};

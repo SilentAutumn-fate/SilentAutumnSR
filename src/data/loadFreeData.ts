@@ -1,107 +1,115 @@
+import * as fs from 'fs';
 import * as path from 'path';
-import * as fs from 'fs-extra';
-import { starrail } from '../proto/starrail';
+import { DATA_DIR } from '../common/constants';
+import type { starrail } from '../proto/starrail';
 
+/**
+ * Loader for the daybreak/freesr "freesr-data.json" profile format.
+ *
+ * The exact same file format as KainSR: a full account snapshot exported by the
+ * freesr config tool, describing every owned lightcone, relic and avatar plus a
+ * free-form battle_config for the test battle entry points.
+ *
+ *   {
+ *     "avatars":      { "<avatar_id>": { owner_uid, avatar_id, data: { rank, skills }, level, promotion, techniques, sp_value, sp_max } },
+ *     "relics":       [ { level, relic_id, relic_set_id, main_affix_id, sub_affixes, internal_uid, equip_avatar } ],
+ *     "lightcones":   [ { level, item_id, equip_avatar, rank, promotion, internal_uid } ],
+ *     "battle_config":{ battle_type, blessings, custom_stats, cycle_count, stage_id, path_resonance_id, monsters }
+ *   }
+ */
 
-type SubAffix = {
+export type SubAffixJson = {
     sub_affix_id: number;
     count: number;
     step: number;
-}
+};
+
+export type DynamicKeyJson = {
+    key: string;
+    value: number;
+};
 
 export class RelicJson {
-    public level: number;
-    public relic_id: number;
-    public relic_set_id: number;
-    public main_affix_id: number;
-    public sub_affixes: SubAffix[];
-    public internal_uid: number;
-    public equip_avatar: number;
-
     constructor(
-        level: number, 
-        relic_id: number, 
-        relic_set_id: number, 
-        main_affix_id: number, 
-        sub_affixes: SubAffix[], 
-        internal_uid: number, 
-        equip_avatar: number
-    ) {
-        this.level = level;
-        this.relic_id = relic_id;
-        this.relic_set_id = relic_set_id;
-        this.main_affix_id = main_affix_id;
-        this.sub_affixes = sub_affixes;
-        this.internal_uid = internal_uid;
-        this.equip_avatar = equip_avatar;
-    }
+        public level: number,
+        public relic_id: number,
+        public relic_set_id: number,
+        public main_affix_id: number,
+        public sub_affixes: SubAffixJson[],
+        public internal_uid: number,
+        public equip_avatar: number,
+    ) {}
+
     public static fromJson(json: any): RelicJson {
         return new RelicJson(
             json.level,
             json.relic_id,
             json.relic_set_id,
             json.main_affix_id,
-            json.sub_affixes,
+            json.sub_affixes ?? [],
             json.internal_uid,
-            json.equip_avatar
+            json.equip_avatar,
         );
     }
-    public to_relic_proto(): starrail.Relic {
-        return new starrail.Relic({
+
+    /** Unique id handed to the client for a relic in the avatar/inventory view. */
+    public get uniqueId(): number {
+        return 1 + this.internal_uid;
+    }
+
+    public toRelicProto(): starrail.Relic {
+        return {
+            // This proto revision names these fields `tid` / `dressAvatarId`;
+            // it has no `id` / `charId`, which would be dropped silently.
+            uniqueId: this.uniqueId,
+            tid: this.relic_id,
             dressAvatarId: this.equip_avatar,
             exp: 0,
             isProtected: false,
             level: this.level,
             mainAffixId: this.main_affix_id,
-            tid: this.relic_id,
-            uniqueId: 1 + this.internal_uid,
-            subAffixList: this.sub_affixes.map(v => ({
+            subAffixList: this.sub_affixes.map((v) => ({
                 affixId: v.sub_affix_id,
                 cnt: v.count,
                 step: v.step,
             })),
-            // Other fields if needed
-        });
+        };
     }
 
-    public to_battle_relic_proto(): starrail.BattleRelic {
-        return new starrail.BattleRelic({
+    public toBattleRelicProto(): starrail.BattleRelic {
+        return {
             id: this.relic_id,
             level: this.level,
             mainAffixId: this.main_affix_id,
-            uniqueId: this.internal_uid,
-            subAffixList: this.sub_affixes.map(v => ({
+            uniqueId: this.uniqueId,
+            subAffixList: this.sub_affixes.map((v) => ({
                 affixId: v.sub_affix_id,
                 cnt: v.count,
                 step: v.step,
             })),
-        });
+        };
     }
 
-    public to_equipment_relic_proto(): starrail.EquipRelic {
-        return new starrail.EquipRelic({
+    /** Relic slot is encoded in the last digit of the relic id. */
+    public toEquipRelicProto(): starrail.EquipRelic {
+        return {
+            // `type` is the slot field in this revision (not `slot`).
             type: this.relic_id % 10,
-            relicUniqueId: 1 + this.internal_uid,
-        });
+            relicUniqueId: this.uniqueId,
+        };
     }
 }
 
 export class LightconeJson {
-    public level: number;
-    public item_id: number;
-    public equip_avatar: number;
-    public rank: number;
-    public promotion: number;
-    public internal_uid: number;
+    constructor(
+        public level: number,
+        public item_id: number,
+        public equip_avatar: number,
+        public rank: number,
+        public promotion: number,
+        public internal_uid: number,
+    ) {}
 
-    constructor(level: number, item_id: number, equip_avatar: number, rank: number, promotion: number, internal_uid: number) {
-        this.level = level;
-        this.item_id = item_id;
-        this.equip_avatar = equip_avatar;
-        this.rank = rank;
-        this.promotion = promotion;
-        this.internal_uid = internal_uid;
-    }
     public static fromJson(json: any): LightconeJson {
         return new LightconeJson(
             json.level,
@@ -109,343 +117,300 @@ export class LightconeJson {
             json.equip_avatar,
             json.rank,
             json.promotion,
-            json.internal_uid
+            json.internal_uid,
         );
     }
-    public to_equipment_proto(): starrail.Equipment {
-        return new starrail.Equipment({
+
+    public get uniqueId(): number {
+        return 2000 + this.internal_uid;
+    }
+
+    public toEquipmentProto(): starrail.Equipment {
+        return {
+            // See the note on RelicJson.toRelicProto: `tid` / `dressAvatarId`.
+            uniqueId: this.uniqueId,
+            tid: this.item_id,
             dressAvatarId: this.equip_avatar,
             exp: 0,
             isProtected: false,
             level: this.level,
             promotion: this.promotion,
             rank: this.rank,
-            tid: this.item_id,
-            uniqueId: 2000 + this.internal_uid
-        });
+        };
     }
 
-    public to_battle_equipment_proto(): starrail.BattleEquipment {
-        return new starrail.BattleEquipment({
+    public toBattleEquipmentProto(): starrail.BattleEquipment {
+        return {
             id: this.item_id,
             level: this.level,
             promotion: this.promotion,
-            rank: this.rank
-        });
+            rank: this.rank,
+        };
     }
 }
-type AvatarData = {
-    rank: number,
-    skills: { [key: string]: number }
-}
+
+export type AvatarDataJson = {
+    rank: number;
+    skills: { [pointId: string]: number };
+};
 
 export class AvatarJson {
-    public owner_uid : number;
-    public avatar_id : number;
-    public data: AvatarData;
-    public level : number;
-    public promotion: number;
-    public techniques: number[];
-    public sp_value: number;
-    public sp_max: number;
-
     constructor(
-        owner_uid: number,
-        avatar_id: number,
-        data: AvatarData,
-        level: number,
-        promotion: number,
-        techniques: number[],
-        sp_value: number,
-        sp_max: number
-    ) {
-        this.owner_uid = owner_uid;
-        this.avatar_id = avatar_id;
-        this.data = data;
-        this.level = level;
-        this.promotion = promotion;
-        this.techniques = techniques;
-        this.sp_value = sp_value;
-        this.sp_max = sp_max;
-    }
+        public owner_uid: number,
+        public avatar_id: number,
+        public data: AvatarDataJson,
+        public level: number,
+        public promotion: number,
+        public techniques: number[],
+        public sp_value: number,
+        public sp_max: number,
+    ) {}
+
     public static fromJson(json: any): AvatarJson {
         return new AvatarJson(
-            json.owner_uid,
+            json.owner_uid ?? 0,
             json.avatar_id,
-            json.data,
+            { rank: json.data?.rank ?? 0, skills: json.data?.skills ?? {} },
             json.level,
             json.promotion,
-            json.techniques,
-            json.sp_value,
-            json.sp_max
+            json.techniques ?? [],
+            json.sp_value ?? 10000,
+            json.sp_max ?? 10000,
         );
     }
-    public to_avatar_proto(lightcone?: LightconeJson, relics: RelicJson[] = []): starrail.Avatar {
 
-        return new starrail.Avatar({
+    private skilltreeList(): starrail.AvatarSkillTree[] {
+        return Object.entries(this.data.skills).map(([pointId, level]) => ({
+            pointId: Number(pointId),
+            level: Number(level),
+        }));
+    }
+
+    /**
+     * The `Avatar` message in this revision carries only level/promotion/exp and
+     * the ids — it has NO `rank`, `skilltreeList` or `equipRelicList`. Those live
+     * in `AvatarPathData`, which is sent alongside in
+     * `GetAvatarDataScRsp.avatarPathDataInfoList`; build it with
+     * `toAvatarPathDataProto()`.
+     */
+    public toAvatarProto(lightcone?: LightconeJson): starrail.Avatar {
+        return {
             baseAvatarId: this.avatar_id,
             exp: 0,
             level: this.level,
             promotion: this.promotion,
-            // 4.5.51: rank / skilltree_list / equip_relic_list 已从 Avatar 迁出，
-            // 改由 to_avatar_path_data_proto() 通过 avatarPathDataInfoList 下发
-            equipmentUniqueId: lightcone ? 2000 + lightcone.internal_uid : 0,
-        });
+            equipmentUniqueId: lightcone ? lightcone.uniqueId : 0,
+        };
     }
 
-    /**
-     * 4.5.51 新增：命途数据（rank / 技能树 / 遗器 / 光锥唯一ID）随
-     * GetAvatarDataScRsp.avatarPathDataInfoList 下发，不再挂在 Avatar 上。
-     * 语义参照 pearl-sr 的 AvatarManager.createAvatarPathData。
-     */
-    public to_avatar_path_data_proto(
+    /** Rank, skill tree and equipped relics for the character screen. */
+    public toAvatarPathDataProto(
         lightcone?: LightconeJson,
         relics: RelicJson[] = [],
     ): starrail.AvatarPathData {
-        return new starrail.AvatarPathData({
+        return {
             avatarId: this.avatar_id,
             rank: this.data.rank,
+            pathEquipmentId: lightcone ? lightcone.uniqueId : 0,
+            equipRelicList: relics.map((r) => r.toEquipRelicProto()),
+            avatarPathSkillTree: Object.entries(this.data.skills).map(([pointId, level]) => ({
+                pointId: Number(pointId),
+                level: Number(level),
+            })),
             dressedSkinId: 0,
-            // 光锥的唯一ID作为该命途的装备ID（与 to_avatar_proto 的 equipmentUniqueId 对应）
-            pathEquipmentId: lightcone ? 2000 + lightcone.internal_uid : 0,
-            avatarPathSkillTree: Object.entries(this.data.skills).map(
-                ([pointId, level]) =>
-                    new starrail.AvatarPathSkillTree({
-                        pointId: Number(pointId),
-                        level: level,
-                    }),
-            ),
-            equipRelicList: relics.map((relic) => relic.to_equipment_relic_proto()),
-        });
+            unlockTimestamp: 0,
+            unkEnhancedId: 0,
+        };
     }
 
-    public to_battle_avatar_proto(index: number, lightcone?: LightconeJson, relics: RelicJson[] = [],): [starrail.BattleAvatar,  starrail.BattleBuff[]] {
-        const battleAvatar = new starrail.BattleAvatar({
-            index: index,
-            avatarType: starrail.AvatarType.AvatarType_AvatarFormalType,
+    /** Avatar as handed to the battle simulator, plus its technique buffs. */
+    public toBattleAvatarProto(
+        index: number,
+        lightcone?: LightconeJson,
+        relics: RelicJson[] = [],
+    ): [starrail.BattleAvatar, starrail.BattleBuff[]] {
+        const battleAvatar: starrail.BattleAvatar = {
+            index,
+            avatarType: 1, // AVATAR_FORMAL_TYPE
             id: this.avatar_id,
             level: this.level,
             rank: this.data.rank,
-            skilltreeList: Object.entries(this.data.skills).map(([pointId, level]) => new starrail.AvatarSkillTree({
-                pointId: Number(pointId),
-                level: level,
-            })),
-            equipmentList: lightcone ? [lightcone.to_battle_equipment_proto()] : [],
+            skilltreeList: this.skilltreeList(),
+            equipmentList: lightcone ? [lightcone.toBattleEquipmentProto()] : [],
             hp: 10000,
             promotion: this.promotion,
-            relicList: relics.map(relic => relic.to_battle_relic_proto()),
+            relicList: relics.map((r) => r.toBattleRelicProto()),
             worldLevel: 6,
-            spBar: new starrail.SpBarInfo({
-                curSp: this.sp_value || 10000,
-                maxSp: this.sp_max || 10000,
-            })
-        });
-    
-        const buffs = this.techniques.map(buffId => new starrail.BattleBuff({
-            waveFlag: 0xffffffff,
-            ownerIndex: index,
-            level: 1,
-            id: buffId,
-        }));
-    
-        return [battleAvatar, buffs]
-    }
-    
+            // SpBarInfo uses curSp/maxSp, not spCur/spNeed.
+            spBar: { curSp: this.sp_value || 10000, maxSp: this.sp_max || 10000 },
+        };
 
-    public to_lineup_avatar_proto(slot: number): starrail.LineupAvatar {
-        return new starrail.LineupAvatar({
+        const buffs = this.techniques.map(
+            (buffId): starrail.BattleBuff => ({
+                waveFlag: 0xffffffff,
+                ownerIndex: index,
+                level: 1,
+                id: buffId,
+            }),
+        );
+
+        return [battleAvatar, buffs];
+    }
+
+    public toLineupAvatarProto(slot: number): starrail.LineupAvatar {
+        return {
             id: this.avatar_id,
             hp: 10000,
             satiety: 100,
-            avatarType: starrail.AvatarType.AvatarType_AvatarFormalType,
-            spBar: new starrail.SpBarInfo({
-                curSp: this.sp_value || 10000,
-                maxSp: this.sp_max || 10000,
-            }),
-            slot: slot
-        });
-    }
-
-    public static to_lineup_info(lineups: { [key: string]: number }): starrail.LineupInfo {
-        const lineupInfo = new starrail.LineupInfo({
-            extraLineupType: starrail.ExtraLineupType.ExtraLineupType_LineupNone,
-            name: "SilentAutumnSR",
-            mp: 5,
-            maxMp: 5
-        });
-
-        for (const [slot, id] of Object.entries(lineups)) {
-            if (id === 0) continue;
-
-            lineupInfo.avatarList.push(new starrail.LineupAvatar({
-                id: id,
-                hp: 10000,
-                satiety: 100,
-                avatarType: starrail.AvatarType.AvatarType_AvatarFormalType,
-                spBar: new starrail.SpBarInfo({
-                    curSp: 10000,
-                    maxSp: 10000,
-                }),
-                slot: lineupInfo.avatarList.length,
-            }));
-        }
-
-        return lineupInfo;
+            avatarType: 1,
+            // SpBarInfo uses curSp/maxSp, not spCur/spNeed.
+            spBar: { curSp: this.sp_value || 10000, maxSp: this.sp_max || 10000 },
+            slot,
+        };
     }
 }
-
 
 export class MonsterJson {
-    public monster_id: number;
-    public level: number;
-    public amount: number;
-    
+    constructor(
+        public monster_id: number,
+        public level: number,
+        public amount: number,
+    ) {}
 
-    constructor(monster_id: number, level: number, amount: number) {
-        this.monster_id = monster_id;
-        this.level = level;
-        this.amount = amount;
-    }
     public static fromJson(json: any): MonsterJson {
-        return new MonsterJson(
-            json.monster_id,
-            json.level,
-            json.amount
-        );
+        return new MonsterJson(json.monster_id, json.level, json.amount ?? 1);
     }
-    public to_scene_monster_info(): starrail.SceneMonster {
-        return new starrail.SceneMonster({
-            monsterId: this.monster_id,
-        });
-    }
-    public static to_scene_monster_wave(wave_index: number, monsters: MonsterJson[]): starrail.SceneMonsterWave {
-        if (wave_index < 1) {
-            wave_index += 1;
-        }
 
-        return new starrail.SceneMonsterWave({
-            battleWaveId: wave_index,
+    /**
+     * NOTE: this proto names the type SceneMonster (not SceneMonsterData) and
+     * SceneMonsterWave.monster_param (not monster_wave_param).
+     */
+    public toSceneMonster(): starrail.SceneMonster {
+        return { monsterId: this.monster_id, maxHp: 0, curHp: 0 };
+    }
+
+    public static toSceneMonsterWave(
+        waveIndex: number,
+        monsters: MonsterJson[],
+    ): starrail.SceneMonsterWave {
+        return {
+            waveIndex: waveIndex < 1 ? waveIndex + 1 : waveIndex,
             monsterParam: {
-                level: monsters.reduce((max, monster) => Math.max(max, monster.level), 0),
+                level: monsters.reduce((max, m) => Math.max(max, m.level), 0),
             },
-            monsterList: monsters.map(v => v.to_scene_monster_info()),
-        });
+            monsterList: monsters.map((m) => m.toSceneMonster()),
+        };
     }
 
-    public static to_scene_monster_waves(monsters: MonsterJson[][]): starrail.SceneMonsterWave[] {
-        return monsters
-            .map((wave, index) => this.to_scene_monster_wave(index + 1, wave));
+    public static toSceneMonsterWaves(monsters: MonsterJson[][]): starrail.SceneMonsterWave[] {
+        return monsters.map((wave, index) => MonsterJson.toSceneMonsterWave(index + 1, wave));
     }
 }
 
-type DynamicKeyJson = {
-    key: string;
-    value: number;
-}
+export class BattleBuffJson {
+    constructor(
+        public level: number,
+        public id: number,
+        public dynamic_key?: DynamicKeyJson,
+    ) {}
 
-//BattleBuff
-class BattleBuffJson {
-    level: number;
-    id: number;
-    dynamic_key?: DynamicKeyJson;
-
-    constructor(level: number, id: number, dynamic_key?: DynamicKeyJson) {
-        this.level = level;
-        this.id = id;
-        this.dynamic_key = dynamic_key;
-    }
     public static fromJson(json: any): BattleBuffJson {
-        return new BattleBuffJson(
-            json.level,
-            json.id,
-            json.dynamic_key
-        );
+        return new BattleBuffJson(json.level, json.id, json.dynamic_key);
     }
-    public to_battle_buff_proto(): starrail.BattleBuff {
-        return new starrail.BattleBuff({
+
+    public toBattleBuffProto(): starrail.BattleBuff {
+        return {
             id: this.id,
             level: this.level,
             waveFlag: 0xffffffff,
             ownerIndex: 0xffffffff,
-            dynamicValues: this.dynamic_key ? {
-                [this.dynamic_key.key]: this.dynamic_key.value
-            } : {}
-        });
+            dynamicValues: this.dynamic_key
+                ? { [this.dynamic_key.key]: this.dynamic_key.value }
+                : {},
+        };
     }
 }
 
-
-enum BattleTypJson {
+/** Battle kinds the freesr editor can export. */
+export enum BattleTypeJson {
     Default = 0,
     MOC = 1,
     PF = 2,
     SU = 3,
     AS = 4,
 }
-export class BattleConfigJson {
-    public battle_type: string;
-    public blessings: BattleBuffJson[]
-    public custom_stats: SubAffix[];
-    public cycle_count: number;
-    public stage_id:number;
-    public path_resonance_id: number;
-    public monsters: MonsterJson[][]
 
+export class BattleConfigJson {
     constructor(
-        battle_type: string,
-        blessings: BattleBuffJson[],
-        custom_stats: SubAffix[],
-        cycle_count: number,
-        stage_id: number,
-        path_resonance_id: number,
-        monsters: MonsterJson[][]
-    ) {
-        this.battle_type = battle_type;
-        this.blessings = blessings;
-        this.custom_stats = custom_stats;
-        this.cycle_count = cycle_count;
-        this.stage_id = stage_id;
-        this.path_resonance_id = path_resonance_id;
-        this.monsters = monsters;
-    }
+        public battle_type: string,
+        public blessings: BattleBuffJson[],
+        public custom_stats: SubAffixJson[],
+        public cycle_count: number,
+        public stage_id: number,
+        public path_resonance_id: number,
+        public monsters: MonsterJson[][],
+    ) {}
+
     public static fromJson(json: any): BattleConfigJson {
         return new BattleConfigJson(
-            json.battle_type,
-            json.blessings.map(BattleBuffJson.fromJson),
-            json.custom_stats,
-            json.cycle_count,
-            json.stage_id,
-            json.path_resonance_id,
-            json.monsters.map((monsterArray: any[]) => monsterArray.map(MonsterJson.fromJson))
+            json?.battle_type ?? 'Default',
+            (json?.blessings ?? []).map(BattleBuffJson.fromJson),
+            json?.custom_stats ?? [],
+            json?.cycle_count ?? 30,
+            json?.stage_id ?? 0,
+            json?.path_resonance_id ?? 0,
+            (json?.monsters ?? []).map((wave: any[]) => wave.map(MonsterJson.fromJson)),
         );
     }
 }
 
-
-
 export class JsonData {
-    public lightcones: LightconeJson[];
-    public relics: RelicJson[];
-    public avatars: { [key: string] : AvatarJson };
-    public battle_config: BattleConfigJson;
+    public lightcones: LightconeJson[] = [];
+    public relics: RelicJson[] = [];
+    public avatars: { [key: string]: AvatarJson } = {};
+    public battle_config: BattleConfigJson = BattleConfigJson.fromJson({});
 
-
-    constructor() {
-
+    public loadFromObject(jsonData: any): JsonData {
+        this.lightcones = (jsonData.lightcones ?? []).map(LightconeJson.fromJson);
+        this.relics = (jsonData.relics ?? []).map(RelicJson.fromJson);
+        this.avatars = Object.fromEntries(
+            Object.entries(jsonData.avatars ?? {}).map(([key, value]) => [
+                key,
+                AvatarJson.fromJson(value),
+            ]),
+        );
+        this.battle_config = BattleConfigJson.fromJson(jsonData.battle_config ?? {});
+        return this;
     }
 
     public async loadJson(filePath: string): Promise<JsonData> {
         const fileContent = await fs.promises.readFile(filePath, 'utf-8');
-        const jsonData = JSON.parse(fileContent);
+        return this.loadFromObject(JSON.parse(fileContent));
+    }
 
-        this.lightcones = jsonData.lightcones.map(LightconeJson.fromJson);
-        this.relics = jsonData.relics.map(RelicJson.fromJson);
-        this.avatars = Object.fromEntries(
-            Object.entries(jsonData.avatars).map(([key, value]) => [key, AvatarJson.fromJson(value)])
-        );
-        this.battle_config = BattleConfigJson.fromJson(jsonData.battle_config);
-        return this;
+    /** Relics equipped by one avatar, ordered by slot. */
+    public relicsOf(avatarId: number): RelicJson[] {
+        return this.relics
+            .filter((r) => r.equip_avatar === avatarId)
+            .sort((a, b) => (a.relic_id % 10) - (b.relic_id % 10));
+    }
+
+    public lightconeOf(avatarId: number): LightconeJson | undefined {
+        return this.lightcones.find((l) => l.equip_avatar === avatarId);
+    }
+
+    public avatar(id: number): AvatarJson | undefined {
+        return this.avatars[String(id)];
+    }
+
+    /** Avatar ids present in the profile, numerically ordered. */
+    public avatarIds(): number[] {
+        return Object.values(this.avatars)
+            .map((a) => a.avatar_id)
+            .sort((a, b) => a - b);
     }
 }
 
-
+export function resolveDataPath(...parts: string[]): string {
+    return path.join(DATA_DIR, ...parts);
+}

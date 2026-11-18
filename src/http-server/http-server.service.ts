@@ -1,210 +1,289 @@
-import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
-import { DataService, VersionConfig } from 'src/data/data.service';
-import { VersionEntry } from 'src/data/FetchHotfix/versionChain';
-import { starrail } from 'src/proto/starrail';
+import { Injectable, Logger } from '@nestjs/common';
+import { HotfixService } from '../data/hotfix.service';
+import { starrail } from '../proto/starrail';
+import { assertFields } from '../proto/validate';
+import { Gateway47, usesGateway47 } from '../proto/gateway47';
+import { isProtocol47 } from '../proto/profile';
+import {
+    DEFAULT_TOKEN,
+    DEFAULT_UID,
+    GAME_PORT,
+    GATEWAY_HOST,
+    HTTP_PORT,
+    HTTP_PUBLIC_HOST,
+    SERVER_NAME,
+} from '../common/constants';
+
+// Preserve the extra flags used by the previously verified 4.5 beta client.
+const LEGACY_GATE_SERVER_BOOL_FIELDS = [99, 497, 717, 1150, 1427, 1463];
+
+/**
+ * The account identity every SDK answer is built around.
+ *
+ * Sourced from the shared settings so one `server.config.json` (or the
+ * `SASR_UID` / `SASR_TOKEN` environment variables) drives the whole login
+ * surface: passport login, session verify and the combo granter all read the
+ * same pair, and the client keys its session on it.
+ */
+const SDK_UID = String(DEFAULT_UID);
+const SDK_TOKEN = DEFAULT_TOKEN;
 
 @Injectable()
 export class HttpServerService {
-    constructor(
-        private dataService: DataService
-    ) { }
+    private readonly logger = new Logger(HttpServerService.name);
 
-    async getDispatchService() {
-        // 4.5.51: GlobalDispatchData -> Dispatch，serverList -> regionList（元素为 RegionInfo）
-        const proto: starrail.Dispatch = new starrail.Dispatch({
+    constructor(private readonly hotfixService: HotfixService) {}
+
+    // ---- dispatch / gateway ------------------------------------------------
+
+    /** GET /query_dispatch */
+    public getDispatchService(): string {
+        const proto: starrail.Dispatch = {
             retcode: 0,
+            [isProtocol47 ? 'topServerRegionName' : 'topSeverRegionName']: SERVER_NAME,
             regionList: [
                 {
-                    name: "SilentAutumnSR",
-                    title: "SilentAutumnSR",
-                    envType: "2",
-                    dispatchUrl: "http://127.0.0.1:21000/query_gateway",
+                    name: SERVER_NAME,
+                    title: SERVER_NAME,
+                    displayName: SERVER_NAME,
+                    envType: isProtocol47 ? '11' : '9',
+                    dispatchUrl: `http://${HTTP_PUBLIC_HOST}:${HTTP_PORT}/query_gateway`,
                 },
             ],
-        });
-        const buffer = starrail.Dispatch.encode(proto).finish();
-        return Buffer.from(buffer).toString("base64");
+        };
+        return this.encodeBase64('Dispatch', proto);
     }
 
     /**
-     * 版本链自动抓取（对齐 pearl-sr 的 dispatch 行为）：
-     *   命中 version.json 直接使用；缺失则向官方 dispatch 抓取并落盘 version.json。
+     * GET /query_gateway?version=&dispatch_seed=
+     *
+     * Serves the hotfix (asset/resource/lua/ifix) URLs for the requested client
+     * version. HotfixService resolves them from every configured source and
+     * persists whatever it learns into src/data/version.json.
      */
-    async getGatewayService(versions: string, dispatchSeed = '') {
-        let entry: VersionEntry | null | undefined = this.dataService.getVersionData()[versions]
+    public async getGatewayService(version: string, dispatchSeed = ''): Promise<string> {
+        // The client's HEAD probe carries no version and only checks HTTP status.
+        if (!version) return '';
+        const urls = (await this.hotfixService.resolve(version, dispatchSeed)).entry;
 
-        if (!entry || !entry.asset_bundle_url) {
-            entry = await this.dataService.ensureVersion(versions, dispatchSeed)
+        if (usesGateway47(version)) {
+            const fields = {
+                ip: GATEWAY_HOST, port: GAME_PORT, regionName: SERVER_NAME,
+                assetBundleUrl: urls.asset_bundle_url, exResourceUrl: urls.ex_resource_url,
+                luaUrl: urls.lua_url, luaVersion: urls.lua_version,
+                baseAssetBundleUrl: urls.base_asset_bundle_url ?? '',
+                ifixUrl: urls.ifixUrl ?? '', ifixVersion: urls.ifix_version ?? '0',
+                unk1: true, unk2: true, unk3: true, unk4: true,
+                unk5: true, unk6: true, unk7: true, unk8: true,
+            };
+            return Buffer.from(Gateway47.encode(Gateway47.fromObject(fields)).finish()).toString('base64');
         }
 
-        if (!entry) {
-            console.warn(`[gateway] 版本 ${versions} 无可用 hotfix（前缀未知或官方抓取失败）`)
-            throw new ForbiddenException(
-                'This version does not exist',
-            );
-        }
+        const proto: starrail.GateServer = {
+            ip: GATEWAY_HOST,
+            port: GAME_PORT,
+            regionName: SERVER_NAME,
+            assetBundleUrl: urls.asset_bundle_url,
+            exResourceUrl: urls.ex_resource_url,
+            luaUrl: urls.lua_url,
+            ifixUrl: urls.ifixUrl ?? '',
+            ifixVersion: urls.ifix_version ?? '0',
+            mdkResVersion: '0',
+            // Match the flags PearlSR sets in its gateway response.
+            unk1: true,
+            unk2: true,
+            unk3: true,
+            unk4: true,
+            unk5: true,
+            unk6: true,
+            unk7: true,
+            unk8: true,
+            unk9: true,
+            unk10: true,
+            unk11: true,
+            unk12: true,
+            unk13: true,
+            unk14: true,
+            unk15: true,
+            unk16: true,
+        };
 
-        const proto: starrail.GateServer = new starrail.GateServer({
-            ip: "127.0.0.1",
-            port: 23301,
-            assetBundleUrl: entry.asset_bundle_url,
-            exResourceUrl: entry.ex_resource_url,
-            luaUrl: entry.lua_url,
-            // 4.5.51: GateServer 已无 lua_version 字段，改走 ifix_url
-            ifixUrl: entry.ifixUrl,
-            ifixVersion: "0",
-            // 4.5.51: GateServer 的这批混淆布尔位（HAFCIPEGPIN 等）已被移除，
-            // 新版仅有 unk1..unk10 等未还原字段，不再逐一硬编码
-            // MJJBCCMCPLK: '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',
-        });
-        const buffer = starrail.GateServer.encode(proto).finish();
-        return Buffer.from(buffer).toString("base64");
-
+        const type = starrail.GateServer;
+        assertFields('GateServer', type, proto);
+        const encoded = Buffer.from(type.encode(type.fromObject(proto)).finish());
+        const legacy = /^(CN|OS)BETAWin4\.5\./.test(version);
+        return (legacy ? appendBoolFields(encoded, LEGACY_GATE_SERVER_BOOL_FIELDS) : encoded)
+            .toString('base64');
     }
-    /** 列出版本链中已知的版本 */
-    listVersionsService() {
-        return { retcode: 0, message: 'OK', versions: this.dataService.listVersions() }
+
+    private encodeBase64(messageName: string, fields: Record<string, any>): string {
+        const type = starrail[messageName];
+        if (!type) throw new Error(`unknown protobuf type ${messageName}`);
+        assertFields(messageName, type, fields);
+        const encoded = type.encode(type.fromObject(fields)).finish();
+        return Buffer.from(encoded).toString('base64');
     }
 
-    /**
-     * 强制刷新版本链中的某个版本（无视已有条目，重新向官方抓取并落盘）。
-     * 用于客户端报了新版本号、但自动抓取被负缓存挡住时的手动触发。
-     */
-    async refreshVersionService(version: string, dispatchSeed = '') {
-        if (!version) {
-            throw new BadRequestException('version 参数必填')
-        }
-        const ok = await this.dataService.autoUpdateVersion(version, dispatchSeed)
+    // ---- SDK stubs ---------------------------------------------------------
+    //
+    // These bodies are copied literal-for-literal from the reference
+    // (pearl-sr dispatch/src/authentication.zig, see docs/spec-dispatch.md §5).
+    // The field names and even the typos matter: the client parses these
+    // responses by key, and a plausible-looking but differently-shaped body is
+    // rejected with nothing but "login failed" on the client side.
+
+    /** POST /:product_name/mdk/shield/api/login */
+    public loginWithAnyService() {
         return {
-            retcode: ok ? 0 : 1,
-            message: ok ? 'OK' : 'fetch failed（版本前缀未知或官方不可达）',
-            version,
-        }
-    }
-
-    async loginWithPassportService() {
-        return {
-            "data": {
-                "id": "06611ed14c3131a676b19c0d34c0644b",
-                "action": "ACTION_NONE",
-                "geetest": null
-            }, "message": "OK", "retcode": 0
-        }
-    }
-    async loginWithAnyService() {
-        return {
-            "data": {
-                "account": {
-                    "area_code": "**",
-                    "email": "SilentAutumnSR",
-                    "country": "VI",
-                    "is_email_verify": "1",
-                    "token": "mostsecuretokenever",
-                    "uid": "1334"
+            data: {
+                account: {
+                    area_code: '**',
+                    // The reference ships this account name; this server brands
+                    // it with its own name instead.
+                    email: `${SERVER_NAME}@StarRail.com`,
+                    country: 'RU',
+                    is_email_verify: '1',
+                    token: SDK_TOKEN,
+                    uid: SDK_UID,
                 },
-                "device_grant_required": false,
-                "reactivate_required": false,
-                "realperson_required": false,
-                "safe_mobile_required": false
+                device_grant_required: false,
+                reactivate_required: false,
+                realperson_required: false,
+                // No underscore between "mobile" and "required" in the reference.
+                safe_mobilerequired: false,
             },
-            "message": "OK",
-            "retcode": 0
-        }
+            message: 'OK',
+            retcode: 0,
+        };
     }
 
-    async riskyApiCheckService() {
-        return {
-            "data": {
-                "id": "06611ed14c3131a676b19c0d34c0644b",
-                "action": "ACTION_NONE",
-                "geetest": null
-            },
-            "message": "OK",
-            "retcode": 0
-        }
-    }
-
-    async granterLoginVerificationService() {
-        return {
-            "data": {
-                "account_type": 1,
-                "combo_id": "1337",
-                "combo_token": "9065ad8507d5a1991cb6fddacac5999b780bbd92",
-                "data": "{\"guest\":false}",
-                "heartbeat": false,
-                "open_id": "1334"
-            },
-            "message": "OK",
-            "retcode": 0
-        }
-    }
-
-    async granterApiGetConfigService() {
+    /** POST /account/risky/api/check */
+    public riskyApiCheckService() {
         return {
             retcode: 0,
-            message: "OK",
+            message: 'OK',
             data: {
-                protocol: true,
+                id: '06611ed14c3131a676b19c0d34c0644b',
+                action: 'ACTION_NONE',
+                // Explicit JSON null in the reference.
+                geetest: null,
+            },
+        };
+    }
+
+    /**
+     * POST /:product_name/combo/granter/login/v2/login
+     *
+     * The 4.5.54 CN SDK parses this with `ComboManager.OnRequestComboLogin`,
+     * which hands the inner `data` string to `ProtocolManager.CheckShowProtocol`
+     * to decide whether to show the user-agreement dialog. That parser reads the
+     * protocol fields straight off the parsed node, so the reference's minimal
+     * `{"guest": false}` makes it dereference a missing key and throw
+     * NullReferenceException —the request "succeeds" but the SDK aborts the
+     * login job, its HTTP coroutine catches the throw, and the player sees the
+     * network-timeout toast while the game loops back to `login_account_plat`:
+     *
+     *   PerformHttpRequest:System.NullReferenceException
+     *     at MiHoYo.SDK.ProtocolManager.CheckShowProtocol (MiHoYo.SDK.JSONNode)
+     *     at MiHoYo.SDK.Win.ComboManager.OnRequestComboLogin (...)
+     *     at MiHoYo.SDK.NetUtil+<PerformHttpRequestInternal>d__16.MoveNext ()
+     *
+     * The protocol block is therefore sent twice —inline in the `data` string the
+     * SDK actually parses, and at the top level for the callers that read it there.
+     */
+    public granterLoginVerificationService() {
+        return {
+            data: {
+                account_type: 1,
+                open_id: SDK_UID,
+                combo_id: SDK_UID,
+                combo_token: '9065ad8507d5a1991cb6fddacac5999b780bbd92',
+                heartbeat: false,
+                // A JSON string inside JSON; the SDK parses this one.
+                data: '{"guest": false, "protocol": false, "protocol_version": "3", "protocol_revision": 0}',
+                protocol: false,
+                protocol_version: '3',
+                protocol_revision: 0,
+            },
+            message: 'OK',
+            retcode: 0,
+        };
+    }
+
+    /**
+     * POST /:product_name/combo/granter/api/compareProtocolVersion
+     *
+     * Part of the combo login handshake: the client offers its protocol version
+     * and the server may hand back a replacement. Answering "no update" (`protocol:
+     * false`) makes the client keep its built-in protocol.
+     *
+     * This endpoint is easy to miss because the global-client proxy config blocks
+     * it, so it never reached a server; the CN client calls it for real and a 404
+     * stops the login dead —the client retries and never asks for the gateway.
+     */
+    public granterCompareProtocolVersionService(body: any) {
+        return {
+            retcode: 0,
+            message: 'OK',
+            data: {
+                protocol: false,
+                protocol_version: String(body?.major ?? '3'),
+                protocol_revision: 0,
+            },
+        };
+    }
+
+    /** GET /:product_name/combo/granter/api/getConfig */
+    public granterApiGetConfigService() {
+        return {
+            retcode: 0,
+            message: 'OK',
+            data: {
+                // SASR does not serve remote user agreements. Keep this consistent
+                // with compareProtocolVersion, which tells the SDK to keep its built-in protocol.
+                protocol: false,
                 qr_enabled: false,
-                log_level: "INFO",
-                announce_url: "",
+                log_level: 'INFO',
+                announce_url: '',
                 push_alias_type: 0,
                 disable_ysdk_guard: true,
                 enable_announce_pic_popup: false,
-                app_name: "崩 ??RPG",
-                qr_enabled_apps: {
-                    bbs: false,
-                    cloud: false,
-                },
-                qr_app_icons: {
-                    app: "",
-                    bbs: "",
-                    cloud: "",
-                },
-                qr_cloud_display_name: "",
+                app_name: '崩坏：星穹铁道',
+                qr_enabled_apps: { bbs: false, cloud: false },
+                qr_app_icons: { app: '', bbs: '', cloud: '' },
+                qr_cloud_display_name: '',
                 enable_user_center: true,
                 functional_switch_configs: {},
             },
-        }
+        };
     }
 
-    async shieldApiLoadConfigService() {
+    /** GET /:product_name/mdk/shield/api/loadConfig */
+    public shieldApiLoadConfigService() {
         return {
             retcode: 0,
-            message: "OK",
+            message: 'OK',
             data: {
                 id: 24,
-                game_key: "hkrpg_global",
-                client: "PC",
-                identity: "I_IDENTITY",
+                game_key: 'hkrpg_cn',
+                client: 'PC',
+                identity: 'I_IDENTITY',
                 guest: false,
-                ignore_versions: "",
-                scene: "S_NORMAL",
-                name: "崩 ??RPG",
+                ignore_versions: '',
+                scene: 'S_NORMAL',
+                name: '崩坏：星穹铁道',
                 disable_regist: false,
                 enable_email_captcha: false,
-                thirdparty: ["fb", "tw", "gl", "ap"],
+                thirdparty: ['fb', 'tw', 'gl', 'ap'],
                 disable_mmt: false,
                 server_guest: false,
                 thirdparty_ignore: {},
                 enable_ps_bind_account: false,
                 thirdparty_login_configs: {
-                    tw: {
-                        token_type: "TK_GAME_TOKEN",
-                        game_token_expires_in: 2592000,
-                    },
-                    ap: {
-                        token_type: "TK_GAME_TOKEN",
-                        game_token_expires_in: 604800,
-                    },
-                    fb: {
-                        token_type: "TK_GAME_TOKEN",
-                        game_token_expires_in: 2592000,
-                    },
-                    gl: {
-                        token_type: "TK_GAME_TOKEN",
-                        game_token_expires_in: 604800,
-                    },
+                    tw: { token_type: 'TK_GAME_TOKEN', game_token_expires_in: 2592000 },
+                    ap: { token_type: 'TK_GAME_TOKEN', game_token_expires_in: 604800 },
+                    fb: { token_type: 'TK_GAME_TOKEN', game_token_expires_in: 2592000 },
+                    gl: { token_type: 'TK_GAME_TOKEN', game_token_expires_in: 604800 },
                 },
                 initialize_firebase: false,
                 bbs_auth_login: false,
@@ -212,35 +291,245 @@ export class HttpServerService {
                 fetch_instance_id: false,
                 enable_flash_login: false,
             },
-        }
+        };
     }
 
-    async shieldApiVerifyService(body: any) {
-        let token = 'aa';
-        let uid = '1334';
-
-        if (body) {
-            if (body.token) {
-                token = body.token;
-            }
-            if (body.uid) {
-                uid = body.uid;
-            }
-        }
-
-        const response = {
+    /** POST /:product_name/mdk/shield/api/verify */
+    public shieldApiVerifyService(body: any) {
+        return {
             retcode: 0,
             message: 'OK',
             data: {
                 account: {
-                    email: 'SilentAutumnSR',
-                    token: token,
-                    uid: uid,
+                    area_code: '**',
+                    country: 'CN',
+                    is_email_verify: '1',
+                    email: `${SERVER_NAME}@StarRail.com`,
+                    // Only string values are echoed; anything else falls back.
+                    token: typeof body?.token === 'string' ? body.token : SDK_TOKEN,
+                    uid: typeof body?.uid === 'string' ? body.uid : SDK_UID,
                 },
             },
         };
-
-        return response;
     }
 
+    /**
+     * POST /account/ma-cn-passport/app/loginByPassword
+     *
+     * This is the response the client's AccountPlatNative.dll actually parses.
+     * The reference returns `data.token` + `data.user_info` (there is no
+     * `data.account` here, and no device/realperson flags) —the same body shape
+     * as shield login does NOT work.
+     *
+     * Note the singular `token` key here versus `tokens` in
+     * passportVerifyService; they are read differently and must not be unified.
+     */
+    public passportLoginService() {
+        return {
+            retcode: 0,
+            message: 'OK',
+            data: {
+                token: { token: SDK_TOKEN, token_type: '1' },
+                user_info: {
+                    aid: SDK_UID,
+                    mid: SDK_UID,
+                    area_code: '**',
+                    country: 'RU',
+                    email: `${SERVER_NAME}@StarRail.com`,
+                    is_email_verify: '1',
+                    is_adult: '1',
+                },
+            },
+        };
+    }
+
+    /**
+     * POST /account/ma-cn-session/app/verify
+     *
+     * Identical to passportLoginService except that the key is `tokens`
+     * (plural) and the value is an OBJECT, not an array.
+     */
+    public globalPassportLoginService() {
+        const result = this.passportLoginService();
+        return {
+            ...result,
+            data: {
+                token: { token: SDK_TOKEN, token_type: 1 },
+                user_info: { ...result.data.user_info, account_name: SERVER_NAME, token: SDK_TOKEN, is_adult: 1 },
+                bind_email_action_ticket: '',
+                reactivate_action_token: '',
+                ext_user_info: { birth: '0', guardian_email: '' },
+            },
+        };
+    }
+
+    public passportVerifyService() {
+        return {
+            retcode: 0,
+            message: 'OK',
+            data: {
+                tokens: { token: SDK_TOKEN, token_type: '1' },
+                user_info: {
+                    aid: SDK_UID,
+                    mid: SDK_UID,
+                    area_code: '**',
+                    country: 'RU',
+                    email: `${SERVER_NAME}@StarRail.com`,
+                    is_email_verify: '1',
+                    is_adult: '1',
+                },
+            },
+        };
+    }
+
+    /** Empty-but-valid answer for the endpoints the client probes alongside login. */
+    public emptyOkService() {
+        return { retcode: 0, message: 'OK', data: {} };
+    }
+
+    // ---- account-platform endpoints ---------------------------------------
+    //
+    // The 4.5.54 CN SDK walks more of passport-api than the reference ever sees,
+    // because the reference's proxy config only force-redirects the dispatch and
+    // gateway URLs. With launcher injection (hkrpg.dll rewrites every SDK URL to
+    // this server) each of these must answer, or the SDK job that needs it fails
+    // and the game restarts the whole login flow in a tight loop.
+
+    /**
+     * POST /account/ma-cn-session/app/exchange
+     *
+     * Swaps the session token returned by passport login (`token_type` 1) for a
+     * game token (`token_type` 4). Request:
+     *   {"mid":"1337","dst_token_type":4,"src_token":{"token_type":1,"token":"aa"}}
+     *
+     * `dst_token_type` is echoed back because the SDK compares it with what it
+     * asked for; a 404 here makes the login job fail with "http request failed"
+     * and the client retries until it gives up with a network timeout.
+     */
+    public sessionExchangeService(body: any) {
+        return {
+            retcode: 0,
+            message: 'OK',
+            data: {
+                token: {
+                    token_type: String(body?.dst_token_type ?? 4),
+                    token: SDK_TOKEN,
+                },
+                user_info: this.userInfo(),
+            },
+        };
+    }
+
+    /** POST /account/ma-cn-session/app/getTokenByGameToken (same shape as exchange). */
+    public getTokenByGameTokenService(body: any) {
+        return {
+            retcode: 0,
+            message: 'OK',
+            data: {
+                token: {
+                    token_type: String(body?.dst_token_type ?? 4),
+                    token: SDK_TOKEN,
+                },
+                user_info: this.userInfo(),
+            },
+        };
+    }
+
+    /**
+     * POST /data_abtest_api/config/experiment/list
+     *
+     * The SDK asks for A/B experiments right after the combo login. Copied from
+     * FreeSR's GetExperimentListHandler: the reply has no `data` key at all, just
+     * `success` —an empty experiment list is the "no experiments" answer.
+     */
+    public experimentListService() {
+        return { retcode: 0, success: true, message: '', data: [] };
+    }
+
+    /**
+     * POST /sdk/dataUpload, /loginsdk/dataUpload, /hkrpg/dataUpload, ...
+     *
+     * Telemetry. The reference proxy config blocks these outright; answering
+     * `{"code":0}` (FreeSR's SdkDataUploadHandler) is the cheapest way to keep
+     * the uploader quiet without 404 noise in the log.
+     */
+    public dataUploadService() {
+        return { code: 0 };
+    }
+
+    /** GET /:product_name/mdk/agreement/api/getAgreementInfos */
+    public agreementInfosService() {
+        return {
+            retcode: 0,
+            message: 'OK',
+            data: { marketing_agreements: [] },
+        };
+    }
+
+    /** GET /device-fp/api/getExtList */
+    public deviceExtListService() {
+        return {
+            retcode: 0,
+            message: 'OK',
+            data: { ext_list: [], device_id: SDK_TOKEN },
+        };
+    }
+
+    /** GET /combo/box/api/config/sdk/combo and /combo/box/api/config/sw/precache */
+    public comboBoxConfigService() {
+        return {
+            retcode: 0,
+            message: 'OK',
+            data: { vals: {} },
+        };
+    }
+
+    /**
+     * Last-resort answer for any SDK path we have not modelled.
+     *
+     * Deliberately declared last so every explicit route wins. It exists because
+     * a 404 from Nest reads to the SDK as a failed network job: with the proxy
+     * these paths were either blocked or passed through to the real service, so
+     * the client never had to cope with a JSON error body.
+     */
+    public fallbackService(method: string, url: string) {
+        this.logger.warn(`unmodelled SDK request ${method} ${url} — answering a neutral 200`);
+        return { retcode: 0, message: 'OK', data: {} };
+    }
+
+    /** The `user_info` block shared by every session/token answer. */
+    private userInfo() {
+        return {
+            aid: SDK_UID,
+            mid: SDK_UID,
+            area_code: '**',
+            country: 'RU',
+            email: `${SERVER_NAME}@StarRail.com`,
+            is_email_verify: '1',
+            is_adult: '1',
+        };
+    }
+}
+
+
+/**
+ * Append bare `true` varint fields to an already-encoded protobuf message.
+ * Duplicate field numbers are legal on the wire and the client's last-wins
+ * parser produces the intended value.
+ */
+export function appendBoolFields(encoded: Buffer, fieldNumbers: number[]): Buffer {
+    const extra: number[] = [];
+    for (const field of fieldNumbers) {
+        const tagBytes: number[] = [];
+        let value = field << 3; // wire type 0 (varint)
+        // Encode the tag as a varint, then the value 1.
+        do {
+            let byte = value & 0x7f;
+            value >>>= 7;
+            if (value) byte |= 0x80;
+            tagBytes.push(byte);
+        } while (value);
+        extra.push(...tagBytes, 1);
+    }
+    return extra.length ? Buffer.concat([encoded, Buffer.from(extra)]) : encoded;
 }

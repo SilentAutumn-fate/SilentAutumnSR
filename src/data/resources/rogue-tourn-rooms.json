@@ -1,0 +1,278 @@
+{
+  "clientVersion": "OSBETAWin4.6.54",
+  "source": "reference RogueTournRoomGen.json (2.7.51) sha256=e43c9f3fb46fba1d7a3162e5cc33b52d4eff61dc0c2963f5969db1755e967911; 0 room(s) dropped because MapEntrance is unknown to OSBETAWin4.6.54",
+  "rooms": [
+    {
+      "roomId": 11011013,
+      "roomType": 1,
+      "mapEntrance": 8040101,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11013012,
+      "roomType": 1,
+      "mapEntrance": 8040301,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11013013,
+      "roomType": 1,
+      "mapEntrance": 8040301,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11014012,
+      "roomType": 1,
+      "mapEntrance": 8040401,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11015011,
+      "roomType": 1,
+      "mapEntrance": 8040501,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11015013,
+      "roomType": 1,
+      "mapEntrance": 8040501,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11016012,
+      "roomType": 1,
+      "mapEntrance": 8040601,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11017011,
+      "roomType": 1,
+      "mapEntrance": 8040701,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11034012,
+      "roomType": 3,
+      "mapEntrance": 8040401,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11036011,
+      "roomType": 3,
+      "mapEntrance": 8040601,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11037011,
+      "roomType": 3,
+      "mapEntrance": 8040701,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11046012,
+      "roomType": 4,
+      "mapEntrance": 8040601,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11075010,
+      "roomType": 7,
+      "mapEntrance": 8040501,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11083013,
+      "roomType": 8,
+      "mapEntrance": 8040301,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11098060,
+      "roomType": 9,
+      "mapEntrance": 8040806,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11101010,
+      "roomType": 10,
+      "mapEntrance": 8040101,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11103010,
+      "roomType": 10,
+      "mapEntrance": 8040301,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 11105010,
+      "roomType": 10,
+      "mapEntrance": 8040501,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 21034012,
+      "roomType": 3,
+      "mapEntrance": 8040401,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 21035011,
+      "roomType": 3,
+      "mapEntrance": 8040501,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 21036012,
+      "roomType": 3,
+      "mapEntrance": 8040601,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 21037011,
+      "roomType": 3,
+      "mapEntrance": 8040701,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 21053012,
+      "roomType": 5,
+      "mapEntrance": 8040301,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 21055011,
+      "roomType": 5,
+      "mapEntrance": 8040501,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 21056012,
+      "roomType": 5,
+      "mapEntrance": 8040601,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 21087011,
+      "roomType": 8,
+      "mapEntrance": 8040701,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 31033012,
+      "roomType": 3,
+      "mapEntrance": 8040301,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 31046012,
+      "roomType": 4,
+      "mapEntrance": 8040601,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 41043013,
+      "roomType": 4,
+      "mapEntrance": 8040301,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 41081013,
+      "roomType": 8,
+      "mapEntrance": 8040101,
+      "groupId": 0,
+      "isRotate": true,
+      "rotateNum": 4
+    },
+    {
+      "roomId": 41085011,
+      "roomType": 8,
+      "mapEntrance": 8040501,
+      "groupId": 0,
+      "isRotate": true,
+      "rotateNum": 3
+    },
+    {
+      "roomId": 51053012,
+      "roomType": 5,
+      "mapEntrance": 8040301,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 51086012,
+      "roomType": 8,
+      "mapEntrance": 8040601,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    },
+    {
+      "roomId": 61047011,
+      "roomType": 4,
+      "mapEntrance": 8040701,
+      "groupId": 0,
+      "isRotate": false,
+      "rotateNum": 0
+    }
+  ]
+}

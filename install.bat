@@ -1,40 +1,31 @@
 @echo off
 setlocal
 cd /d "%~dp0"
+title SilentAutumnSR - install
 
-echo ============================================
-echo   SilentAutumnSR - Installing dependencies
-echo ============================================
-echo.
+rem One-click installer. Needs nothing preinstalled but Windows and PowerShell:
+rem if Node.js is missing it is downloaded (checksum-verified) into runtime\node,
+rem so nothing is added to PATH and no administrator rights are required.
 
-where node >nul 2>nul
+where powershell >nul 2>nul
 if errorlevel 1 (
-    echo [ERROR] Node.js not found.
-    echo         Please install Node.js first: https://nodejs.org/
+    echo [ERROR] Windows PowerShell was not found.
+    echo         This installer needs it to download Node.js.
     pause
     exit /b 1
 )
 
-echo Node.js detected:
-call node -v
-echo.
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\install.ps1" %*
+set "RC=%ERRORLEVEL%"
 
-echo Running "npm install" ...
-echo.
-call npm install
-if errorlevel 1 (
+if not "%RC%"=="0" (
     echo.
-    echo [ERROR] npm install failed.
-    echo         Please check your network connection or npm configuration.
+    echo Install failed with exit code %RC%.
     pause
-    exit /b 1
+    exit /b %RC%
 )
 
 echo.
-echo ============================================
-echo   Done. Dependencies installed.
-echo   Next: double-click run.bat to start
-echo         the server and the proxy.
-echo ============================================
+echo You can close this window. Next step: double-click run.bat
 pause
 endlocal

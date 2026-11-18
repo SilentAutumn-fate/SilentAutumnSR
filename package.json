@@ -1,12 +1,12 @@
 {
-  "name": "silentautumnsr-2.3.5",
-  "version": "0.0.1",
-  "description": "",
+  "name": "silentautumnsr",
+  "version": "4.7.0-beta",
+  "description": "SilentAutumnSR - Honkai: Star Rail private server (protocol 4.7 beta)",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "node tools/build.js",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -14,10 +14,8 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "gen:proto": "node tools/gen-proto.js",
+    "hotfix:update": "node dist/data/hotfix-cli.js"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.10.10",
@@ -60,14 +58,14 @@
   },
   "jest": {
     "moduleFileExtensions": [
+      "ts",
       "js",
-      "json",
-      "ts"
+      "json"
     ],
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      "^.+\\.ts$": "ts-jest"
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"

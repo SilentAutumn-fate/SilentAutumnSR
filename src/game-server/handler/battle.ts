@@ -1,168 +1,300 @@
-import { starrail } from 'src/proto/starrail';
-import { NetSession } from "../NetSession"
-import { CmdID } from 'src/proto/cmdId';
-import { DataService } from 'src/data/data.service';
-import { JsonData, MonsterJson } from 'src/data/loadFreeData';
-import { DataInGame } from 'src/data/loadDataInGame';
+import { CmdID } from '../../proto/cmdId';
+import { starrail } from '../../proto/starrail';
+import type { NetSession } from '../NetSession';
+import type { HandlerEntry } from './types';
+import {
+    createBattle,
+    createChallengeStage,
+    endBattle,
+    activeBattleInfo,
+    startBattle,
+} from '../manager/battle_mgr';
+import { isChallengeMode } from '../manager/challenge_mgr';
+import { finishGridFightBattle } from './grid-fight';
 
+/**
+ * Battle service — port of pearl-sr `services/battle.zig`
+ * (`docs/spec-battle-challenge.md` §12.1–§12.9, summary table in §17).
+ *
+ * The `SceneBattleInfo` builders live in `../manager/battle_mgr.ts`; this module
+ * is only dispatch and response shaping. Points that are easy to get wrong and
+ * are therefore spelled out at each call site:
+ *
+ * The started payload is retained for recovery queries until settlement.
+ */
 
+/** `MonsterBattleType` members used by `getBattleType` (`proto-dump MonsterBattleType`). */
+const MONSTER_BATTLE_TYPE_TRIGGER_BATTLE = 1;
+const MONSTER_BATTLE_TYPE_DIRECT_DIE_SKIP_BATTLE = 3;
+const MONSTER_BATTLE_TYPE_NO_BATTLE = 4;
 
-export async function onStartCocoonStageCsReq(
-    body: starrail.StartCocoonStageCsReq,
-    session: NetSession,
-    dataModule: DataService | null = null
-) {
-    const jsonData: JsonData = dataModule.getDataJson();
-    const dataInGame: DataInGame = dataModule.getDataInGame();
-    const battleInfo: starrail.SceneBattleInfo = new starrail.SceneBattleInfo();
+/**
+ * `data.zig:22` `IgnoreBattle` — membership is tested on
+ * `attacked_by_entity_id - 100000`, so these are avatar ids, not entity ids.
+ */
+const IGNORE_BATTLE = [
+    1509, 1504, 1501, 1414, 1405, 1404, 1225, 1321, 1314, 1312, 1305, 1302, 1217, 1108,
+];
+/** `data.zig:23` `SkipBattle`. */
+const SKIP_BATTLE = [1506, 1408, 1308, 1510];
 
-    // Initialize battleInfo
-    battleInfo.stageId = jsonData.battle_config.stage_id;
-    battleInfo.logicRandomSeed = Math.floor(Math.random() * 0xFFFFFFFF); // Simulating random seed
-    battleInfo.battleId = 1;
-    battleInfo.roundsLimit = jsonData.battle_config.cycle_count; // wave
+/** `attacker_id >= 100000` — the only range the two tables are checked in. */
+const ATTACKER_ENTITY_OFFSET = 100000;
+/** `id > 1000000` distinguishes a boss/monster from a player-window entity. */
+const MONSTER_ENTITY_THRESHOLD = 1000000;
 
-    // Process avatars
-    for (let i = 0; i < 4; i++) {
-        let avatarId = dataInGame.lineups[i] || 0;
-        if (avatarId === 0) {
-            continue;
-        }
-        const multiPathMain = [8001, 8002, 8003, 8004, 8005, 8006];
-        if (multiPathMain.includes(avatarId)) {
-            avatarId = dataModule.getIdMain()
-        }
-        const multiPathM7 = [1001, 1224,];
-        if (multiPathM7.includes(avatarId)) {
-            avatarId = dataModule.getIdM7()
-        }
-        const avatar = jsonData.avatars[avatarId.toString()];
-        if (avatar) {
-            const lightcone = jsonData.lightcones.find(lc => lc.equip_avatar === avatar.avatar_id);
-            const relics = jsonData.relics.filter(r => r.equip_avatar === avatar.avatar_id);
+/**
+ * `getBattleType(id, attacker_id, skill_index, is_challenge)` — evaluate in
+ * EXACTLY this order; every branch falls through to `TRIGGER_BATTLE`, including
+ * `attacker_id === 0` and the 1001…99999 window.
+ */
+function getBattleType(
+    targetEntityId: number,
+    attackerId: number,
+    skillIndex: number,
+    isChallenge: boolean,
+): number {
+    if (skillIndex !== 1) return MONSTER_BATTLE_TYPE_TRIGGER_BATTLE;
+    if (attackerId >= 1 && attackerId <= 1000) return MONSTER_BATTLE_TYPE_TRIGGER_BATTLE;
 
-            const [battleAvatar, techs] = avatar.to_battle_avatar_proto(
-                i,
-                lightcone,
-                relics
-            );
-
-            techs.forEach(tech => battleInfo.buffList.push(tech));
-            battleInfo.battleAvatarList.push(battleAvatar);
-        }
-    }
-
-    // Custom stats for avatars
-    for (const stat of jsonData.battle_config.custom_stats) {
-        for (const avatar of battleInfo.battleAvatarList) {
-            if (avatar.relicList.length === 0) {
-                avatar.relicList.push(new starrail.BattleRelic({
-                    id: 61011,
-                    mainAffixId: 1,
-                    level: 1
-                }));
-            }
-
-            const subAffix = avatar.relicList[0].subAffixList.find(a => a.affixId === stat.sub_affix_id);
-            if (subAffix) {
-                subAffix.cnt = stat.count;
-            } else {
-                avatar.relicList[0].subAffixList.push(new starrail.RelicAffix({
-                    affixId: stat.sub_affix_id,
-                    cnt: stat.count,
-                    step: stat.step
-                }));
-            }
+    if (attackerId >= ATTACKER_ENTITY_OFFSET) {
+        const attackerOffset = attackerId - ATTACKER_ENTITY_OFFSET;
+        if (IGNORE_BATTLE.includes(attackerOffset)) return MONSTER_BATTLE_TYPE_NO_BATTLE;
+        if (SKIP_BATTLE.includes(attackerOffset)) {
+            if (isChallenge) return MONSTER_BATTLE_TYPE_TRIGGER_BATTLE;
+            return targetEntityId > MONSTER_ENTITY_THRESHOLD
+                ? MONSTER_BATTLE_TYPE_TRIGGER_BATTLE
+                : MONSTER_BATTLE_TYPE_DIRECT_DIE_SKIP_BATTLE;
         }
     }
 
-    // Blessings
-    for (const blessing of jsonData.battle_config.blessings) {
-        const buffs = new starrail.BattleBuff({
-            id: blessing.id,
-            level: blessing.level,
-            waveFlag: 0xffffffff,
-            ownerIndex: 0xffffffff,
-            dynamicValues: {} // Initialize as an empty object
-        });
+    return MONSTER_BATTLE_TYPE_TRIGGER_BATTLE;
+}
 
-        if (blessing.dynamic_key) {
-            buffs.dynamicValues[blessing.dynamic_key.key] = blessing.dynamic_key.value;
-        }
-        battleInfo.buffList.push(buffs);
-    }
+/**
+ * `onStartCocoonStage` — 1432 -> 1484.
+ *
+ * `cocoon_id`, `prop_entity_id` and `wave` are echoed; `world_level`,
+ * `HECCOBFBJFI` and `CBJCKEIGGNL` are never read, and the request has no effect
+ * on the battle at all (the waves come from the profile). `challenge_cnt` is left
+ * at 0 — pearl-sr never writes it. No stamina is charged and nothing is persisted.
+ */
+export async function onStartCocoonStageCsReq(req: any, session: NetSession): Promise<void> {
+    const battle = createBattle(session);
+    startBattle(session, battle);
 
-    // PF score object
-    if (jsonData.battle_config.battle_type === 'PF') {
-        const battleTargetList = new starrail.BattleTargetList({
-            battleTargetList: [new starrail.BattleTarget({ id: 10001, progress: 0 })]
-        });
-
-        battleInfo.battleTargetInfo[1] = battleTargetList;
-        for (let i = 2; i <= 4; i++) {
-            battleInfo.battleTargetInfo[i] = new starrail.BattleTargetList();
-        }
-        battleInfo.battleTargetInfo[5] = new starrail.BattleTargetList({
-            battleTargetList: [
-                new starrail.BattleTarget({ id: 2001, progress: 0 }),
-                new starrail.BattleTarget({ id: 2002, progress: 0 })
-            ]
-        });
-    }
-
-    // Apocalyptic Shadow
-    if (jsonData.battle_config.battle_type === 'AS') {
-        const battleTargetList = new starrail.BattleTargetList({
-            battleTargetList: [new starrail.BattleTarget({ id: 90005, progress: 0 })]
-        });
-        battleInfo.battleTargetInfo[1] = battleTargetList;
-    }
-
-    // SU
-    // 4.5.51: SceneBattleInfo 已移除 APKPBAMMNHM（命途回响槽位），
-    // 原 PLDMLJCICKK / CHCJBNEICFA / SpProgress 三个类型也一并消失。
-    // 新版的命途回响结构需要按 pearl-sr/echium-server 的 4.5.x 实现重新映射，
-    // 见 TODO-4.5.51-SU-PATHRESONANCE。
-    // if (jsonData.battle_config.battle_type === 'SU') {
-    //     battleInfo.APKPBAMMNHM.push(new starrail.PLDMLJCICKK({
-    //         GHHNOEFIBKE: jsonData.battle_config.path_resonance_id,
-    //         status: new starrail.CHCJBNEICFA({
-    //             sp: new starrail.SpProgress({
-    //                 spCur: 10000,
-    //                 spNeed: 10000
-    //             })
-    //         })
-    //     }));
-    // }
-    void jsonData.battle_config.battle_type;
-
-    // Monsters
-    battleInfo.monsterWaveList = MonsterJson.to_scene_monster_waves(jsonData.battle_config.monsters);
-
-    const startCocoonStageScRsp = new starrail.StartCocoonStageScRsp({
+    await session.sendRsp(CmdID.CmdStartCocoonStageScRsp, {
         retcode: 0,
-        cocoonId: body.cocoonId,
-        propEntityId: body.propEntityId,
-        wave: body.wave,
-        battleInfo: battleInfo,
+        cocoonId: Number(req?.cocoonId ?? 0),
+        propEntityId: Number(req?.propEntityId ?? 0),
+        wave: Number(req?.wave ?? 0),
+        battleInfo: battle,
+    });
+}
+
+/**
+ * `onQuickStartCocoonStage` — 1360 -> 1316.
+ *
+ * Note the response has no `prop_entity_id` field, and the request has no such
+ * field either: only `cocoon_id` and `wave` are read.
+ */
+export async function onQuickStartCocoonStageCsReq(req: any, session: NetSession): Promise<void> {
+    const battle = createBattle(session);
+    startBattle(session, battle);
+
+    await session.sendRsp(CmdID.CmdQuickStartCocoonStageScRsp, {
+        retcode: 0,
+        cocoonId: Number(req?.cocoonId ?? 0),
+        wave: Number(req?.wave ?? 0),
+        battleInfo: battle,
+    });
+}
+
+/**
+ * `onQuickStartFarmElement` — 4.7: 1359 -> 1318.
+ *
+ * `world_level` and `PAOFHFLFFHD` (an obfuscated field that this proto keeps)
+ * are echoed verbatim; the echoed `world_level` does NOT reach the battle, whose
+ * `SceneBattleInfo.world_level` stays hard-coded 6.
+ *
+ * NOTE: 4.5.54 needed two spellings for this pair (`CmdQuickStartFarmElementCsReq`
+ * for the request and `CmdStartQuickFarmElementRsp` for the response, id 1356).
+ * The 4.7 protocol renamed the response to `QuickStartFarmElementScRsp` and moved
+ * it to 1318, so both directions now use one consistent spelling.
+ */
+export async function onQuickStartFarmElementCsReq(req: any, session: NetSession): Promise<void> {
+    const battle = createBattle(session);
+    startBattle(session, battle);
+
+    await session.sendRsp(CmdID.CmdStartQuickFarmElementRsp, {
+        retcode: 0,
+        worldLevel: Number(req?.worldLevel ?? 0),
+        battleInfo: battle,
+    });
+}
+
+/**
+ * `onStartBattleCollege` — 5775 -> 5760.
+ *
+ * The college id is echoed only: the stage and the monsters are always the
+ * profile's defaults.
+ */
+export async function onStartBattleCollegeCsReq(req: any, session: NetSession): Promise<void> {
+    const battle = createBattle(session);
+    startBattle(session, battle);
+
+    await session.sendRsp(CmdID.CmdStartBattleCollegeScRsp, {
+        retcode: 0,
+        id: Number(req?.id ?? 0),
+        battleInfo: battle,
+    });
+}
+
+function enterSceneBattle(session: NetSession, eventId = 0): any {
+    const active = activeBattleInfo(session);
+    if (active) return active;
+    const challenge = isChallengeMode(session) ? createChallengeStage(session) : null;
+    const battle = challenge?.monsterWaveList?.some((wave: any) => wave.monsterList?.length)
+        ? challenge
+        : createBattle(session, eventId);
+    if (!battle.battleAvatarList?.length ||
+        !battle.monsterWaveList?.some((wave: any) => wave.monsterList?.length)) return null;
+    startBattle(session, battle);
+    return battle;
+}
+
+export async function onSceneEnterStageCsReq(req: any, session: NetSession): Promise<void> {
+    const battleInfo = enterSceneBattle(session, Number(req?.eventId ?? 0));
+    await session.sendRsp(CmdID.CmdSceneEnterStageScRsp, {
+        retcode: battleInfo ? 0 : starrail.Retcode.RET_BATTLE_FAIL,
+        battleInfo,
+    });
+}
+
+/** Resolve PearlSR battle triggers from both supported assist-target layouts. */
+export async function onSceneCastSkillCsReq(req: any, session: NetSession): Promise<void> {
+    const attackerId = Number(req?.attackedByEntityId ?? 0);
+    const skillIndex = Number(req?.skillIndex ?? 0);
+    const isChallenge = isChallengeMode(session);
+
+    // stdout noise in the reference (services/battle.zig `Highlight`), kept so the
+    // port can be traced the same way.
+    console.log(`SKILL INDEX: ${skillIndex}`);
+    console.log(`ATTACKED BY ENTITY ID: ${attackerId}`);
+
+    let battleInfo: any = null;
+    const monsterBattleInfo: any[] = [];
+
+    const targetIds = new Set<number>([
+        ...(req?.assistMonsterEntityIdList ?? []),
+        ...(req?.assistMonsterEntityInfo ?? []).flatMap((group: any) => group.entityIdList ?? []),
+        ...(req?.hitTargetEntityIdList ?? []).filter((id: number) => session.scene?.monsterEvents?.has(id)),
+    ]);
+    for (const rawId of targetIds) {
+        const entityId = Number(rawId ?? 0);
+        if (entityId <= 0) continue;
+        const battleType = getBattleType(entityId, attackerId, skillIndex, isChallenge);
+
+        const knownMonster = session.scene?.monsterEvents?.has(entityId);
+        const legacyTarget = attackerId <= 1000 || entityId < 1000 ||
+            (!isChallenge && (attackerId > MONSTER_ENTITY_THRESHOLD || entityId > MONSTER_ENTITY_THRESHOLD));
+        if (!knownMonster && !legacyTarget) continue;
+        monsterBattleInfo.push({
+            targetMonsterEntityId: entityId,
+            monsterBattleType: battleType,
+        });
+    }
+
+    const trigger = monsterBattleInfo.find((info) => info.monsterBattleType === MONSTER_BATTLE_TYPE_TRIGGER_BATTLE);
+    if (trigger) {
+        battleInfo = enterSceneBattle(session, session.scene?.monsterEvents?.get(trigger.targetMonsterEntityId));
+    }
+    await session.sendRsp(CmdID.CmdSceneCastSkillScRsp, {
+        retcode: trigger && !battleInfo ? starrail.Retcode.RET_BATTLE_FAIL : 0,
+        castEntityId: Number(req?.castEntityId ?? 0),
+        monsterBattleInfo,
+        // null when no entry was a TRIGGER_BATTLE.
+        battleInfo,
+    });
+}
+
+/** Return the exact payload used to start the active battle. */
+export async function onGetCurBattleInfoCsReq(_req: unknown, session: NetSession): Promise<void> {
+    await session.sendRsp(CmdID.CmdGetCurBattleInfoScRsp, {
+        retcode: 0,
+        battleInfo: activeBattleInfo(session),
+    });
+}
+
+/** Clear the active battle only when the result matches its identifiers. */
+export async function onPVEBattleResultCsReq(req: any, session: NetSession): Promise<void> {
+    const battle = session.battle;
+    const battleId = Number(req?.battleId ?? 0);
+    const stageId = Number(req?.stageId ?? 0);
+    const gridFight = battle && battle.battleId === session.gridFightBattleId;
+    const status = Number(req?.endStatus ?? 0);
+    const mismatch = (gridFight && (battleId !== battle.battleId || stageId !== battle.stageId ||
+        (status !== 1 && status !== 2 && status !== 3))) ||
+        (battle && ((battleId && battleId !== battle.battleId) ||
+        (stageId && stageId !== battle.stageId)));
+    if (gridFight && process.env.SASR_GF_TRACE !== '0') {
+        console.log(`[gridfight] battle result battle=${battleId} stage=${stageId} `
+            + `status=${status} mismatch=${mismatch}`);
+    }
+    const response = session.sendRsp(CmdID.CmdPVEBattleResultScRsp, {
+        retcode: mismatch ? starrail.Retcode.RET_BATTLE_STAGE_NOT_MATCH : 0,
+        battleId: battleId || battle?.battleId || 0,
+        endStatus: status,
+        stageId: stageId || battle?.stageId || 0,
     });
 
-    const bufferData = starrail.StartCocoonStageScRsp.encode(startCocoonStageScRsp).finish();
-
-    await session.send(CmdID.CmdStartCocoonStageScRsp, bufferData);
+    if (!mismatch) {
+        endBattle(session);
+        if (gridFight) {
+            session.gridFightBattleId = null;
+            await finishGridFightBattle(session, status);
+        }
+    }
+    await response;
 }
 
-export async function onPVEBattleResultCsReq(
-    body: starrail.PVEBattleResultCsReq,
-    player: NetSession,
-    dataModule: DataService | null = null
-): Promise<void> {
-    const proto: starrail.PVEBattleResultScRsp = new starrail.PVEBattleResultScRsp({
+/**
+ * `onSceneCastSkillCostMp` — 1408 -> 1468.
+ *
+ * Only `cast_entity_id` is read. No MP bookkeeping happens and
+ * `SceneCastSkillMpUpdateScNotify` (1464) is never sent by the reference.
+ */
+export async function onSceneCastSkillCostMpCsReq(req: any, session: NetSession): Promise<void> {
+    await session.sendRsp(CmdID.CmdSceneCastSkillCostMpScRsp, {
         retcode: 0,
-        endStatus: body.endStatus,
-        battleId: body.battleId,
-    })
-    const bufferData = starrail.PVEBattleResultScRsp.encode(proto).finish()
-    await player.send(CmdID.CmdPVEBattleResultScRsp, bufferData);
+        castEntityId: Number(req?.castEntityId ?? 0),
+    });
 }
 
+/**
+ * `onSyncClientResVersion` — 4.7: 9 -> 4 (retcode) / 8 (echo).
+ *
+ * 4.5.54 shipped this pair under the obfuscated `LJKMPIMKOMO`; the 4.7 dump has
+ * the readable `client_res_version` on both sides, so no translation is needed.
+ * The value is logged and echoed unchanged, like the reference does.
+ */
+export async function onSyncClientResVersionCsReq(req: any, session: NetSession): Promise<void> {
+    console.log(`CLIENT RES VERSION: ${req?.clientResVersion ?? 0}`);
+    await session.sendRsp(CmdID.CmdSyncClientResVersionScRsp, {
+        retcode: 0,
+        clientResVersion: Number(req?.clientResVersion ?? 0),
+    });
+}
+
+export const handlers: HandlerEntry[] = [
+    { cmdId: CmdID.CmdStartCocoonStageCsReq, action: onStartCocoonStageCsReq },
+    { cmdId: CmdID.CmdQuickStartCocoonStageCsReq, action: onQuickStartCocoonStageCsReq },
+    { cmdId: CmdID.CmdStartQuickFarmElementCsReq, action: onQuickStartFarmElementCsReq },
+    { cmdId: CmdID.CmdStartBattleCollegeCsReq, action: onStartBattleCollegeCsReq },
+    { cmdId: CmdID.CmdSceneCastSkillCsReq, action: onSceneCastSkillCsReq },
+    { cmdId: CmdID.CmdSceneEnterStageCsReq, action: onSceneEnterStageCsReq },
+    { cmdId: CmdID.CmdGetCurBattleInfoCsReq, action: onGetCurBattleInfoCsReq },
+    { cmdId: CmdID.CmdPVEBattleResultCsReq, action: onPVEBattleResultCsReq },
+    { cmdId: CmdID.CmdSceneCastSkillCostMpCsReq, action: onSceneCastSkillCostMpCsReq },
+    { cmdId: CmdID.CmdSyncClientResVersionCsReq, action: onSyncClientResVersionCsReq },
+];

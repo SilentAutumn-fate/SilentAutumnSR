@@ -1,0 +1,4018 @@
+{
+  "clientVersion": "OSBETAWin4.6.54",
+  "source": "OSBETAWin4.6.54 design data (folder StarRail_4.6.51) Persistent/DesignData/Windows/c24332f35f3f8487b7677c6fc46b9798.bytes sha256=88ff7e287df1da70986ffb7ddde0d23b869df2e8b45a73679e08a35086a6d852; decoded via ItemRow.FromBinary RVA 1E92C760 (MainType=Material only)",
+  "materials": [
+    {
+      "itemId": 101,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 102,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110,
+      "stackLimit": 1000
+    },
+    {
+      "itemId": 170,
+      "stackLimit": 9999999
+    },
+    {
+      "itemId": 171,
+      "stackLimit": 9999999
+    },
+    {
+      "itemId": 201,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 211,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 212,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 213,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 221,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 222,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 223,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 231,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 232,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 233,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 234,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 235,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 236,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 237,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 238,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 239,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 241,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 251,
+      "stackLimit": 999999
+    },
+    {
+      "itemId": 252,
+      "stackLimit": 999999
+    },
+    {
+      "itemId": 261,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262,
+      "stackLimit": 999999
+    },
+    {
+      "itemId": 263,
+      "stackLimit": 999999
+    },
+    {
+      "itemId": 271,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 281,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 282,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 283,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 284,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 291,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 503,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 800,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 802,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 803,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 804,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 821,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 11001,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11002,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11003,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11004,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11005,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11006,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11008,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11009,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11013,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11014,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11015,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11101,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11102,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11103,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11104,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11105,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11106,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11107,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11108,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11109,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11110,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11111,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11112,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11201,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11202,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11203,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11204,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11205,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11206,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11207,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11208,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11209,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11210,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11211,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11212,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11213,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11214,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11215,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11217,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11218,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11220,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11221,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11222,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11223,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11224,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11225,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11301,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11302,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11303,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11304,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11305,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11306,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11307,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11308,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11309,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11310,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11312,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11313,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11314,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11315,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11317,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11321,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11401,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11402,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11403,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11404,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11405,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11406,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11407,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11408,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11409,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11410,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11412,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11413,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11414,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11415,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11501,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11502,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11503,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11504,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11505,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11506,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11507,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11508,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11509,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11510,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11511,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11512,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 11513,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18001,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18002,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18003,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18004,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18005,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18006,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18007,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18008,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18009,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 18010,
+      "stackLimit": 999
+    },
+    {
+      "itemId": 110101,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110111,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110112,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110113,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110121,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110122,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110123,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110131,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110132,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110133,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110141,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110142,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110143,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110151,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110152,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110153,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110161,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110162,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110163,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110171,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110172,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110173,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110181,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110182,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110183,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110191,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110192,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110193,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110201,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110202,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110203,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110211,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110212,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110213,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110221,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110222,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110223,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110231,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110232,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110233,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110241,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110242,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110243,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110251,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110252,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110253,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110261,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110262,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110263,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110271,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110272,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110273,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110281,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110282,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110283,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110291,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110292,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110293,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110311,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110312,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110313,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110400,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110401,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110402,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110403,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110404,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110405,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110406,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110407,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110411,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110412,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110413,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110414,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110415,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110416,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110417,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110421,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110422,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110423,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110424,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110425,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110426,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110427,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110431,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110432,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110433,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110434,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110435,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110436,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110437,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110443,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110501,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110502,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110503,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110504,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110505,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110506,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110507,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110508,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110509,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110510,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 110610,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 111000,
+      "stackLimit": 999999
+    },
+    {
+      "itemId": 111001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 111002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 111003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 111011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 111012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 111013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 112001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 112002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 112003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 112011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 112012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 112013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 113001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 113002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 113003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 113011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 113012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 113013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 114001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 114002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 114003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 114011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 114012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 114013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 115001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 115002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 115003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 115011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 115012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 115013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 116001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 116002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 116003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 120000,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 120001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 120002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 120003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 120004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 120005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 120006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 121000,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 121001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 121002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 121003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 121004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 121005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 121006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 121007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 121008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 122000,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 122001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 122002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 122003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 122004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 123000,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 123001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 123002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 123003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 131204,
+      "stackLimit": 1
+    },
+    {
+      "itemId": 131213,
+      "stackLimit": 1
+    },
+    {
+      "itemId": 131308,
+      "stackLimit": 1
+    },
+    {
+      "itemId": 180001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180009,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180010,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 180013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181009,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181010,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181014,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181015,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181016,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181017,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 181018,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182009,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182010,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 182011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 183001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 183002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 183003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 183004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 183005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 183006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 183007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250009,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250015,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250019,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250020,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250021,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250022,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250023,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250027,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250031,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250032,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250033,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250034,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250037,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250101,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250102,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250103,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250104,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250105,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250106,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250107,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250108,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250109,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250110,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250111,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250112,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250113,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250114,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250115,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250116,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250117,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250118,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250119,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250120,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250121,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250122,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250123,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250124,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250125,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250126,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250127,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250128,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250129,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250130,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250131,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250132,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250133,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250201,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250202,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250203,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250204,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250205,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250207,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250208,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250209,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250210,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250211,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250212,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250213,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250214,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250215,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250216,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250217,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250218,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250219,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250220,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250221,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250222,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250223,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250224,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250225,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250226,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250227,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250228,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250229,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250230,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250231,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250232,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250233,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250300,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250302,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250304,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250305,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250306,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250307,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250308,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250309,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250310,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250311,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250312,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250313,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250314,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250315,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250316,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250317,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250318,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250319,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250320,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250321,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 250700,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250701,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250702,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250703,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250704,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250705,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250706,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250707,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250708,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250709,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250710,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 250711,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 252100,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252101,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252102,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252103,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252104,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252105,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252106,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252107,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252108,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252109,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252110,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252111,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252112,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252113,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252114,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252115,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252116,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252117,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252118,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252119,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252120,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252121,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252122,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252123,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252124,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252125,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252126,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252127,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252128,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252129,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252130,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252131,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252132,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252133,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252134,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252201,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252202,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252203,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252204,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252205,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252206,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252207,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252208,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252209,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252210,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252211,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252212,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252213,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252214,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252215,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252216,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252217,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252218,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252219,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252220,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252221,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252222,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252223,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252224,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252225,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252301,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252302,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252303,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252304,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252305,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252306,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252307,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252308,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252309,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252310,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252311,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252312,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252313,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252314,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252315,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252316,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252317,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252318,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252319,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252320,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252321,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252325,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252326,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252327,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252328,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252329,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252330,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252334,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252335,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252336,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252346,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252347,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252348,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252349,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252350,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252351,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252352,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252353,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252354,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252355,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252356,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252357,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252358,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252359,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252360,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252361,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252362,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252363,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252367,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252368,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252369,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252370,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252371,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252372,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252373,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252374,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252375,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252379,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252380,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252381,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252391,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252392,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252393,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252394,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252395,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252396,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252397,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252398,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252399,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252400,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252401,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252402,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252403,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252404,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252405,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252406,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252407,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252408,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252409,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252410,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252411,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252412,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252413,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252414,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252421,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252422,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252423,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252424,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252425,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252426,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252436,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252437,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252438,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252439,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252440,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252441,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252442,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252443,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252444,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252445,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252446,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252447,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252451,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252452,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252453,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252457,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252458,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252459,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252460,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252461,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252462,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252463,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252464,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252465,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252466,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252467,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252468,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252469,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252470,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 252471,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260000,
+      "stackLimit": 9999999
+    },
+    {
+      "itemId": 260001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260009,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260010,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260014,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260015,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260016,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260017,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260018,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260019,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260020,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260021,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260022,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260023,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260024,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260031,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260032,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260033,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260034,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260035,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 260036,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 261001,
+      "stackLimit": 999999999
+    },
+    {
+      "itemId": 262000,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262009,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262010,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262014,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262015,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 262016,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264000,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264009,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264010,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264014,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264015,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264016,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264017,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264018,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264019,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264020,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264021,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264022,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264023,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264024,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264025,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264026,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264027,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264028,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264029,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264030,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264031,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264032,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264033,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264034,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264035,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264101,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264201,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264301,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264401,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264402,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264403,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264404,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264405,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264406,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264407,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264408,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264409,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264410,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264411,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264412,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264413,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264416,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264417,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264418,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264419,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264420,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264421,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264422,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264423,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264424,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264425,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264426,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264427,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264428,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264502,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264503,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264504,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264505,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264506,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264507,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264508,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264509,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264510,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264511,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264512,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264513,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264516,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264517,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264518,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264519,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264520,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264521,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264522,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264523,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264524,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264996,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264997,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264998,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 264999,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265009,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265010,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265014,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265015,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265016,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265017,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265018,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265019,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265020,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265021,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265022,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265023,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265024,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265025,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265026,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265027,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265028,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265029,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265030,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265031,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265032,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265033,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265034,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265035,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265036,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265037,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265038,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265039,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265040,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265041,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265042,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265043,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265044,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265045,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265046,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265047,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 265048,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 266001,
+      "stackLimit": 99999999
+    },
+    {
+      "itemId": 266002,
+      "stackLimit": 99999999
+    },
+    {
+      "itemId": 266003,
+      "stackLimit": 99999999
+    },
+    {
+      "itemId": 266004,
+      "stackLimit": 99999999
+    },
+    {
+      "itemId": 266005,
+      "stackLimit": 99999999
+    },
+    {
+      "itemId": 267001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268003,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268004,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268005,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268006,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268007,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268008,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268009,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268010,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268011,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268012,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268013,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268014,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268015,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268016,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268017,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268018,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268019,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268020,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268021,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268022,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268023,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268024,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268025,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268026,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268027,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268028,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268029,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268030,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268031,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268032,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268033,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268034,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268035,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268036,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268037,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268038,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268039,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268040,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268041,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268042,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268043,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268044,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268045,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268046,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268047,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268048,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268049,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268050,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268051,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268052,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268053,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268054,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268055,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268056,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268057,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268058,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268059,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268060,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268061,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268062,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268063,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268064,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268065,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268066,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268067,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268068,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268070,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 268201,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 269001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 270000,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 270001,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 270002,
+      "stackLimit": 99999
+    },
+    {
+      "itemId": 270003,
+      "stackLimit": 999999999
+    },
+    {
+      "itemId": 270004,
+      "stackLimit": 999999999
+    },
+    {
+      "itemId": 270005,
+      "stackLimit": 999999999
+    },
+    {
+      "itemId": 270006,
+      "stackLimit": 999999999
+    },
+    {
+      "itemId": 270007,
+      "stackLimit": 999999999
+    },
+    {
+      "itemId": 291001,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 291002,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 291003,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 291004,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 291005,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 291006,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 291007,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 291008,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 292001,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 292002,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 292003,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 292004,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 292005,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 292006,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 293001,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 293002,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 293003,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 293004,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 293005,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 293006,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 293007,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 293008,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 294001,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 294002,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 294003,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 294004,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 294005,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 294006,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295001,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295002,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295003,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295004,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295005,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295006,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295007,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295008,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295009,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295010,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295011,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295012,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295013,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295014,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295015,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295016,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295017,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295018,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295019,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295020,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295021,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295022,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295023,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295024,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295025,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295026,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295027,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295028,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295121,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295122,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295123,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295124,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295125,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295126,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295127,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295128,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295129,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295130,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295131,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295132,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295133,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295134,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295520,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295601,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295602,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295603,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295604,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295605,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295606,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295607,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295608,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295609,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295610,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295611,
+      "stackLimit": 100
+    },
+    {
+      "itemId": 295612,
+      "stackLimit": 100
+    }
+  ]
+}

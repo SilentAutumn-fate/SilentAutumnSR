@@ -1,0 +1,18 @@
+{
+  "source": "StarRail_Beta/GameAssembly.dll",
+  "sourceSha256": "9e712188942258f9f3652b586b71d70b9e6d22d29c3f0bc0d11ae24b1e2fcf51",
+  "registryType": "BHGPNEODPMD",
+  "registryConstructorRva": "0x14B16440",
+  "registryReturnRva": "0x14B28330",
+  "dictionaryAddVa": "0x18DBA14D0",
+  "entries": 2717,
+  "uniqueMessageTypes": 2717,
+  "uniqueCommandIds": 2717,
+  "unresolvedSlots": 0,
+  "method": "Parse generated Google.Protobuf.MessageParser<T> getters: first RIP-relative RCX load references own message class type slot, confirmed by class-init byte [rcx+0xb7]. Parse native registry Dictionary<RuntimeTypeHandle,ushort> Add calls: RDX loads same class slot then adds0x30 (RuntimeTypeHandle), R8W loads actual cmdId. Join exact slot addresses. No enum/name guessing.",
+  "knownNamedCrossCheck": {
+    "overlap": 5,
+    "mismatches": 0
+  },
+  "note": "2695 of2717 message names remain obfuscated; semantic names require separately validated schema mapping. Complete registry does not imply complete semantic deobfuscation."
+}

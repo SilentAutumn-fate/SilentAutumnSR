@@ -6,8 +6,8 @@ import { DataModule } from './data/data.module';
 import { GameServerModule } from './game-server/game-server.module';
 
 @Module({
-  imports: [HttpServerModule, DataModule, GameServerModule],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [DataModule, HttpServerModule, GameServerModule],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}
