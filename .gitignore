@@ -38,7 +38,6 @@ __pycache__/
 
 # ---------------------------------------------------------------------------
 # Optional local integration tools and private certificates
-/FireFly.Proxy.v2/config.json
 /launcher/
 *.pfx
 *.p12
