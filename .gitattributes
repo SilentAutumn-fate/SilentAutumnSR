@@ -30,5 +30,6 @@ package-lock.json -diff
 *.dll binary
 *.pfx binary
 
-# Use the packaged FireFly config line endings on checkout.
-FireFly.Proxy.v2/config.json text eol=crlf
+# Preserve the original FireFly package JSON byte for byte.
+FireFly.Proxy.v2/config.json -text
+FireFly.Proxy.v2/config.tmpl.json -text
