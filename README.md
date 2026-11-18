@@ -1,7 +1,6 @@
 # SilentAutumnSR
 
 《崩坏：星穹铁道》本地私服。启动后用任意账号名和密码登录游戏即可。
-目前仅支持通过配置文件进行战斗。
 
 ## 快速开始
 
@@ -11,19 +10,10 @@
    双击 stop.bat         停止服务端
 ```
 
-需要 Windows 10 或更新版本。安装脚本可准备 Node.js；4.7.51 的 KCP 适配器还需要 Python 3（可用 `SASR_PYTHON` 指定解释器）。
+需要 Windows 10 或更新版本。安装脚本可准备 Node.js；4.7.51 的 KCP 适配器还需要 Python 3。
 `install.bat -Force` 可完全重装。
 
-首次检出后，将 `server.config.example.json` 复制为 `server.config.json`，使用模板中的本机监听地址。运行 `install.bat` 安装依赖并生成协议，再运行 `run.bat` 启动服务端。FireFly 代理及默认配置随仓库提供。归档包附带的 `rootCert.pfx` 含已公开的 CA 私钥。使用前请将此文件移出代理目录，让代理生成本机证书。另用启动器接入时请自行准备 `launcher/`。参见 [FireFly 使用说明](docs/firefly.md)。
-
-开发验证可运行 `npm ci`、`npm run build` 和 `npm test -- --runInBand`。构建会从提交中的协议输入生成运行文件。
-
-## 配置
-
-- 本机配置及环境变量见 [配置说明](docs/configuration.md)。
-- FreeSR 配置文件位于 `src/data/freesr-data.json`。
-
-服务端需从项目根目录启动。
+FireFly 代理随仓库提供。原包内的 `rootCert.pfx` 含已公开的 CA 私钥，请在运行前将它移出代理目录，让代理在本机生成证书。服务端需从项目根目录启动。
 
 ## 游戏内命令
 
@@ -44,3 +34,5 @@
 
 仅供学习与个人离线使用，与 HoYoverse 无关联；请使用合法获取的客户端，不要重新
 分发游戏资源或第三方程序。
+
+FireFly 代理和 Guardian 来自 [FireflySR.Tool.Proxy v2.0.0](https://github.com/YYHEggEgg/FireflySR.Tool.Proxy/tree/v2.0.0)，适用 [GPL-3.0](runtime/kcp/LICENSE-GPL-3.0.txt)。
